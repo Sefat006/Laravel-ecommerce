@@ -10,12 +10,16 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ### 1. Installation
 Create the project using the Laravel installer:
-```bash laravel new ecommerce-app ```
+```bash
+laravel new ecommerce-app
+```
 
 ### 2. Update Dependencies
 Ensure all core packages are up to date:
 
-```bash composer update ```
+```bash
+composer update
+```
 ### 3. Database Configuration
 Create a new database in your database manager (e.g., phpMyAdmin, TablePlus).
 

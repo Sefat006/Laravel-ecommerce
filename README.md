@@ -35,7 +35,62 @@ DB_PASSWORD=
 ```
 ### 4. Run Migrations
 Execute the following command to create the necessary tables in your database:
-```bash php artisan migrate ```
+```bash
+php artisan migrate
+```
+
+### 5. Creating new migration(only migration/table) through command:
+Use this command when you only need to create a new database table without an associated model or controller.
+```bash
+php artisan make:migration create_TABLE_NAME
+```
+
+### 6. ### 5. Creating new Controller:
+Its work Like a middleman. A **Controller** handles user requests and controls the application logic.```bash --resource``` will automatically create classes for **CRUD** Operation.
+```bash
+php artisan make:controller CONTROLLER_NAME --resource
+```
+* Creating Controller with Folder:
+```bash
+php artisan make:controller FOLDER_NAME/CONTROLLER_NAME --resource
+```
+
+
+📂 View Controller Architecture
+```bash
+app/
+└── Http/
+    └── Controllers/
+        └── Admin/
+        └── Frontend/
+                └── WelcomeController.php
+
+```
+
+
+📂 View Public Architecture
+```bash
+public/                     # The web root; contains all publicly accessible files
+├── admin/
+│   └── assets/
+│       ├── css/
+│       ├── fonts/
+│       ├── images/
+│       ├── js/
+│       ├── styles/
+│       ├── vendor/
+│       └── webfonts/
+├── build/                  # Usually contains Vite or Mix compiled assets
+└── front/
+    └── assets/
+        ├── css/
+        ├── fonts/
+        ├── images/
+        ├── js/
+        └── scss/           # Note: Source files like SCSS are usually kept in /resources
+
+```
+
 
 
 📂 View Architecture
@@ -44,21 +99,22 @@ The project uses a structured view system to separate the Admin Dashboard from t
 Directory Tree:
 ```bash
 resources/views/
-├── admin/
-│   ├── auth/                 # Admin Login & Authentication
-│   └── layouts/
-│       ├── nothing/          # Fallback or empty layouts
-│       └── partials/         # Admin UI Components
-│           ├── footer.blade.php
-│           ├── header.blade.php
-│           └── sidebar.blade.php
-├── front/
-│   ├── auth/                 # Customer Login & Registration
-│   └── layouts/
-│       ├── nothing/          # Fallback or empty layouts
-│       └── partials/         # Frontend UI Components
-│           ├── footer.blade.php
-│           ├── header.blade.php
-│           └── sidebar.blade.php
-└── pages/                    # Static and Generic Pages 
+            ├── admin/
+            │   ├── auth/                 # Admin Login & Authentication
+            │   ├── layouts/
+            │       └── app.blade.php
+            │       └── partials/         # Admin UI Components
+            │           ├── footer.blade.php
+            │           ├── header.blade.php
+            │           └── sidebar.blade.php
+            ├── front/
+            │   ├── auth/                 # Customer Login & Registration
+            │   ├── pages/
+            │   └── layouts/
+            │       └── app.blade.php
+            │       └── partials/         # Frontend UI Components
+            │           ├── footer.blade.php
+            │           ├── header.blade.php
+            │           └── sidebar.blade.php
+            └──
 ```

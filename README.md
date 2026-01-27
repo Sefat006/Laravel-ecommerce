@@ -46,7 +46,7 @@ php artisan make:migration create_TABLE_NAME
 ```
 
 ### 6. ### 5. Creating new Controller:
-Its work Like a middleman. A **Controller** handles user requests and controls the application logic.```bash --resource``` will automatically create classes for **CRUD** Operation.
+Its work Like a middleman. A **Controller** handles user requests and controls the application logic.``` --resource``` will automatically create classes for **CRUD** Operation.
 ```bash
 php artisan make:controller CONTROLLER_NAME --resource
 ```
@@ -56,7 +56,7 @@ php artisan make:controller FOLDER_NAME/CONTROLLER_NAME --resource
 ```
 
 
-📂 View Controller Architecture
+### 📂 View Controller Architecture
 ```bash
 app/
 └── Http/
@@ -68,7 +68,7 @@ app/
 ```
 
 
-📂 View Public Architecture
+### 📂 View Public Architecture
 ```bash
 public/                     # The web root; contains all publicly accessible files
 ├── admin/
@@ -93,8 +93,47 @@ public/                     # The web root; contains all publicly accessible fil
 
 
 
-📂 View Architecture
+### 📂 View Architecture
 The project uses a structured view system to separate the Admin Dashboard from the Frontend Storefront.
+
+**@include**
+Use: Include a Blade partial (reusable view) inside another view.
+
+Syntax:
+```bash
+@include('folder.view_name')
+```
+
+Example:
+```@include('front.layouts.partials.header')```
+→ Inserts the content of header.blade.php here
+
+
+## Blade Template Structure
+
+* 1. Layout (`app.blade.php`)
+- Acts as the main template for pages.
+- Common parts like **header** and **footer** are included using:
+```bash
+@include('front.layouts.partials.header')
+    between them will be main content(yield)
+@include('front.layouts.partials.footer')
+```
+Define where page-specific content goes using:
+***@yield('content')*** **<------ is used here**------------------------|
+                                                                        |
+* 2. Page (welcome.blade.php)                                           |
+                                                                        |
+Extends the main layout:                                                |
+                                                                        |
+``` @extends('front.layouts.app') ```                                   |
+                                                                        |
+                                                                        |
+Inject page-specific content into layout:                               |
+                                                                        |
+@section('content') **this content ---->**------------------------------|
+    <!-- Content is basically the name of the main part -->
+@endsection
 
 Directory Tree:
 ```bash
@@ -110,11 +149,12 @@ resources/views/
             ├── front/
             │   ├── auth/                 # Customer Login & Registration
             │   ├── pages/
+            |   |       └──privacy-policy.blade.php
             │   └── layouts/
-            │       └── app.blade.php
+            │       └── app.blade.php # after welcome page, this will be called. Here is the components are called
             │       └── partials/         # Frontend UI Components
             │           ├── footer.blade.php
             │           ├── header.blade.php
             │           └── sidebar.blade.php
-            └──
+            └── Welcome.blade.php # first, this page will be called (goto this page, then you'll find app.blade.php is called there)
 ```

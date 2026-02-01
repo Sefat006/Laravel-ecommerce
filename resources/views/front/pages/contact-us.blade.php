@@ -24,7 +24,7 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="single-contact-info border-0 text-center">
-                                <img class="contact-info-icon" src="assets/images/contact-info-1.png"
+                                <img class="contact-info-icon" src="{{ asset('front/assets/images/contact-info-1.png')}}"
                                     alt="contact-info" />
                                 <h3 class="contact-info-title">Email</h3>
                                 <p class="contact-info-content">
@@ -36,7 +36,7 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="single-contact-info text-center">
-                                <img class="contact-info-icon" src="assets/images/contact-info-2.png"
+                                <img class="contact-info-icon" src="{{ asset('front/assets/images/contact-info-2.png')}}"
                                     alt="contact-info" />
                                 <h3 class="contact-info-title">Address</h3>
                                 <p class="contact-info-content">
@@ -49,7 +49,7 @@
 
                         <div class="col-lg-4 col-md-4 col-sm-6">
                             <div class="single-contact-info text-center">
-                                <img class="contact-info-icon" src="assets/images/contact-info-3.png"
+                                <img class="contact-info-icon" src="{{ asset('front/assets/images/contact-info-3.png')}}"
                                     alt="contact-info" />
                                 <h3 class="contact-info-title">Phone</h3>
                                 <p class="contact-info-content">

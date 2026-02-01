@@ -21,7 +21,7 @@
             <div class="row align-items-lg-center">
                 <div class="col-lg-5 offset-lg-1 col-md-6">
                     <div class="about-us-image">
-                        <img src="assets/images/about_us_page/aboutus-image.jpg" alt="about us image" />
+                        <img src="{{ asset('front/assets/images/about_us_page/aboutus-image.jpg')}}" alt="about us image" />
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6">

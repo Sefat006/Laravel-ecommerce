@@ -1,0 +1,21 @@
+<?php
+
+namespace App\Http\Controllers\Frontend;
+
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
+class CheckoutController extends Controller
+{
+    public function index()
+    {
+        return view('front.checkout.index');
+    }
+
+    // Place order (placeholder)
+    public function placeOrder(Request $request)
+    {
+        // TODO: Add logic to process order
+        return response()->json(['message' => 'Order placed successfully']);
+    }
+}

@@ -45,12 +45,22 @@ Use this command when you only need to create a new database table without an as
 php artisan make:migration create_TABLE_NAME
 ```
 
-### 6. ### 5. Creating new Controller:
+### 6. Creating new Controller:
 Its work Like a middleman. A **Controller** handles user requests and controls the application logic.``` --resource``` will automatically create classes for **CRUD** Operation.
 ```bash
 php artisan make:controller CONTROLLER_NAME --resource
 ```
 * Creating Controller with Folder:
+```bash
+php artisan make:controller FOLDER_NAME/CONTROLLER_NAME --resource
+```
+
+### 6. Creating new Modal:
+A Model represents your data and the logic related to that data.
+Think of it like this (real-life analogy):
+* Controller → Manager (decides what to do)
+* Model → Data notebook (stores & handles data)
+* View → Screen/UI (shows data)
 ```bash
 php artisan make:controller FOLDER_NAME/CONTROLLER_NAME --resource
 ```

@@ -29,7 +29,7 @@
                                         <td class="product-image-title">
                                             <div class="product-top">
                                                 <a href="/product/single/rosmo-namino-2" class="image"><img
-                                                        src="assets/images/products/tshirt.png"
+                                                        src="{{ asset('front/assets/images/products/tshirt.png')}}"
                                                         alt="Compare Product"></a>
                                             </div>
                                             <div>
@@ -41,7 +41,7 @@
                                         <td class="product-image-title">
                                             <div class="product-top">
                                                 <a href="product-details.html" class="image"><img
-                                                        src="assets/images/products/tshirt.png"
+                                                        src="{{ asset('front/assets/images/products/tshirt.png') }}"
                                                         alt="Compare Product"></a>
                                             </div>
                                             <div>

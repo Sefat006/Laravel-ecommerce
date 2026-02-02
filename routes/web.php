@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Frontend\PagesController;
 use App\Http\Controllers\Frontend\ProductController;
 use App\Http\Controllers\Frontend\SubscribeController;
+use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\Frontend\WelcomeController;
 use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\Route;
@@ -63,4 +64,4 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 
 // Subscribe Routes
-Route::post('/subscribe', [SubscribeController::class, 'store'])->name('subscribe.store');
+Route::post('/subscribe', [SubscriberController::class, 'store'])->name('subscribe.store');

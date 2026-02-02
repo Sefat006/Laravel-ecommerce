@@ -85,7 +85,7 @@
                                         </td>
                                         <td>
                                             <button class="delet-btn deleteWishlist" data-id="1" title="Delete Item">
-                                                <img src="assets/images/close.svg" alt="close" /></button>
+                                                <img src="{{ asset('assets/images/close.svg')}}" alt="close" /></button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -144,7 +144,7 @@
                                         </td>
                                         <td>
                                             <button class="delet-btn deleteWishlist" data-id="2" title="Delete Item">
-                                                <img src="assets/images/close.svg" alt="close" /></button>
+                                                <img src="{{ asset('assets/images/close.svg')}}" alt="close" /></button>
                                         </td>
                                     </tr>
                                 </tbody>

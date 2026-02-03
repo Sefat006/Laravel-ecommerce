@@ -82,7 +82,7 @@
                                             <a class="menu-link" href="{{ route('privacy.policy') }}">Privacy Policy</a>
                                         </li>
                                         <li class="menu-item">
-                                            <a class="menu-link" href="{{ route('contact.us') }}">Contact Us</a>
+                                            <a class="menu-link" href="{{ route('contact') }}">Contact Us</a>
                                         </li>
                                         <li class="menu-item">
                                             <a class="menu-link" href="{{ route('about.us') }}">About Us</a>
@@ -99,12 +99,12 @@
                                 Receive our latest updates about our <br> products and promotions.
                             </p>
                             <div class="newsletter-form mb-40">
-                                <form action="{{route('subscribe.store')}}" method="POST">
+                                <form action="{{route('subscriber.store')}}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <input type="email" class="form-control subscribe" id="email"
                                             name="email" placeholder="Email" required />
-                                        <button type="button" class="subscribe-btn subscribe_btn">Subscribe</button>
+                                        <button type="submit" class="subscribe-btn subscribe_btn">Subscribe</button>
                                     </div>
                                 </form>
                             </div>
@@ -219,7 +219,7 @@
     <script src="{{ asset('front/assets/js/common.js') }}"></script>
 
 
-    <script src="{{ asset('front/admin/js/toastr.min.js') }}"></script>
+    <script src="{{ asset('front/assets/js/toastr.js') }}"></script>
 
     <script>
         toastr.options = {

@@ -35,7 +35,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" href="{{ asset('front/assets/images/favicon.png') }}" type="image/x-icon">
 
-    <link rel="stylesheet" href="{{ asset('front/admin/css/toastr.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('front/assets/css/toastr.css') }}">
 
 </head>
 
@@ -52,6 +52,21 @@
 
     <!-- footer area start here -->
     @include('front.layouts.partials.footer')
+
+    <!-- toastr script, after connecting custom toastr css('front/assets/css/toastr.css') and js(footer) -->
+    <script>
+        // Toastr for Session Messages
+        @if(session('success'))
+            toastr.success("{{ session('success') }}", 'Success');
+        @endif
+
+        // Toastr for Validation Errors
+        @if($errors->any())
+            @foreach($errors->all() as $error)
+                toastr.error("{{ $error }}", 'Validation Error');
+            @endforeach
+        @endif
+    </script>
 </body>
 
 </html>

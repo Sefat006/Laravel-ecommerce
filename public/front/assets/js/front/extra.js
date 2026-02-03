@@ -1,48 +1,31 @@
-(function ($) {
-    "use strict";
-    let _token = $('meta[name="csrf-token"]').attr('content');
-    $(".subscribe_btn").on('click', function (e) {
-        e.preventDefault();
-        let subscribe = $('#subscribe').val();
-        console.log(subscribe);
-        $.ajax({
-            url: $('#SubscribeStore').data("url"),
-            type: 'post',
-            data: {
-                subscribe: subscribe,
-                _token: _token,
-            },
-            success: function (data) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'bottom-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-                Toast.fire({
-                    icon: 'success',
-                    title: 'Subscribe Successfully'
-                })
-            },
-            error: function (data) {
-                const Toast = Swal.mixin({
-                    toast: true,
-                    position: 'bottom-end',
-                    showConfirmButton: false,
-                    timer: 3000,
-                    timerProgressBar: true,
-                    didOpen: (toast) => {
-                        toast.addEventListener('mouseenter', Swal.stopTimer)
-                        toast.addEventListener('mouseleave', Swal.resumeTimer)
-                    }
-                })
-                Toast.fire({ icon: 'error', title: data.responseJSON.errors.subscribe })
-            }
-        });
+error: function (data) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'bottom-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
     });
-})(jQuery)
+
+    let errors = data.responseJSON?.errors;
+    let errorMsg = '';
+
+    if (errors) {
+        if (errors.email) {
+            errorMsg = errors.email[0]; // validation error for email
+        } else {
+            // pick first error message if multiple
+            errorMsg = Object.values(errors)[0][0];
+        }
+    } else if (data.responseJSON?.message) {
+        errorMsg = data.responseJSON.message; // fallback message
+    } else {
+        errorMsg = 'Something went wrong!';
+    }
+
+    Toast.fire({ icon: 'error', title: errorMsg });
+}

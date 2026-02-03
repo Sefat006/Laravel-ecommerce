@@ -65,7 +65,7 @@ Think of it like this (real-life analogy):
 php artisan make:controller FOLDER_NAME/CONTROLLER_NAME --resource
 ```
 
-## Creating Migration:
+## 🗂️ Creating Migration:
 
 Migration is the Table. create a migration means creating a table
 ```bash
@@ -73,8 +73,23 @@ php artisan make:migration create_TABLE_NAME_table
 ```
 **after that, run on terminal**
 ```bash
-php artisan migration
+php artisan migrate
 ```
+---
+
+## 🗂️ Using MailChimp and DrewM package for Storing Mail:
+
+```bash
+composer require drewm/mailchimp-api
+
+```
+**after that, copy and paste it on the .env file(at the end)**
+```bash
+MAILCHIMP_APIKEY=your-mailchimp-api-key
+MAILCHIMP_LIST_ID=your-mailchimp-list-id
+```
+---
+
 
 ### 📂 View Controller Architecture
 ```bash

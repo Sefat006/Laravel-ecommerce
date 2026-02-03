@@ -18,7 +18,7 @@
                                     <p class="contact-info">
                                         <i class="icon flaticon-phone"></i>
                                         Call Us:
-                                        +123 2587 7886
+                                        {{ get_Settings()->phone ?? ""}}
                                     </p>
                                 </a>
                             </div>

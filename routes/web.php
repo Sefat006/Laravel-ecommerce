@@ -1,11 +1,11 @@
 <?php
 
+
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Frontend\PagesController;
 use App\Http\Controllers\Frontend\ProductController;
-use App\Http\Controllers\Frontend\SubscribeController;
 use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\Frontend\WelcomeController;
 use App\Http\Controllers\Frontend\WishlistController;
@@ -27,7 +27,8 @@ Route::get('/', [WelcomeController::class, 'index']);
 
 // Common Pages
 Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about.us');
-Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact.us');
+Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact');
+Route::post('/contact-us', [PagesController::class, 'storeContact'])->name('contact.store');
 Route::get('/faq', [PagesController::class, 'faq'])->name('faq');
 Route::get('/terms-conditions', [PagesController::class, 'termsAndConditions'])->name('terms.conditions');
 Route::get('/privacy-policy', [PagesController::class, 'privacyPolicy'])->name('privacy.policy');
@@ -64,4 +65,4 @@ Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.in
 Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('checkout.process');
 
 // Subscribe Routes
-Route::post('/subscribe', [SubscriberController::class, 'store'])->name('subscribe.store');
+Route::post('/subscribe', [SubscriberController::class, 'store'])->name('subscriber.store');

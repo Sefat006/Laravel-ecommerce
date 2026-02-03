@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Slider;
+use App\Models\Testimonial;
 use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
     public function index(){
-        return view('welcome');
+        $sliders = Slider::where('status', 1)->get();
+        $testimonials = Testimonial::where('status', 1)->get();
+        return view('welcome', compact('sliders', 'testimonials'));
     }
 }

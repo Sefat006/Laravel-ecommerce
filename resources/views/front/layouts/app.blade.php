@@ -5,10 +5,10 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Home | Fashionwave - Ecommerce Website</title>
-    <meta name="description" content="Fashionwave - Ecommerce Website" />
+    <title>@yield('title')</title>
+    <meta name="description" content="@yield('description')" />
     <meta name="keywords"
-        content="business,eCommerce, Ecommerce, ecommerce, shop, shopify, shopify ecommerce, creative, woocommerce, design, gallery, minimal, modern, html, html5, responsive" />
+        content="@yield('keywords')" />
     <meta name="author" content="liveprojectacademy" />
     <meta name="csrf-token" content="z8IzV1IjwBDBzh2xk5mWIRncryxtnW1G2NyKj67x">
 

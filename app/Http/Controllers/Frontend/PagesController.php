@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Page;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
@@ -13,12 +14,14 @@ class PagesController extends Controller
     //
     public function aboutUs()
     {
-        return view('front.pages.about-us'); // resources/views/front/pages/about.blade.php
+        $data = Page::where('slug','about-us')->first();
+        return view('front.pages.about-us', compact('data')); // resources/views/front/pages/about.blade.php
     }
 
     public function contactUs()
     {
-        return view('front.pages.contact-us'); // resources/views/front/pages/contact.blade.php
+        $data = Page::where('slug','contact-us')->first();
+        return view('front.pages.contact-us', compact('data')); // resources/views/front/pages/contact.blade.php
     }
 
     public function storeContact(Request $request)
@@ -80,11 +83,13 @@ class PagesController extends Controller
 
     public function termsAndConditions()
     {
-        return view('front.pages.terms-conditions'); // resources/views/front/pages/terms.blade.php
+        $data = Page::where('slug','terms-and-conditions')->first();
+        return view('front.pages.terms-conditions', compact('data')); // resources/views/front/pages/terms.blade.php
     }
 
     public function privacyPolicy()
     {
-        return view('front.pages.privacy-policy'); // resources/views/pages/privacy.blade.php
+        $data = Page::where('slug','privacy-policy')->first();
+        return view('front.pages.privacy-policy', compact('data')); // resources/views/pages/privacy.blade.php
     }
 }

@@ -25,7 +25,6 @@ Create a new database in your database manager (e.g., phpMyAdmin, TablePlus).
 
 Open your .env file and update the following lines with your database name and credentials:
 ``` bash
-Code snippet
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -33,17 +32,27 @@ DB_DATABASE=ecommerce_db
 DB_USERNAME=root
 DB_PASSWORD=
 ```
+
+---
+
 ### 4. Run Migrations
 Execute the following command to create the necessary tables in your database:
 ```bash
 php artisan migrate
 ```
 
-### 5. Creating new migration(only migration/table) through command:
+## Creating new migration(only migration/table) through command:
+
 Use this command when you only need to create a new database table without an associated model or controller.
 ```bash
-php artisan make:migration create_TABLE_NAME
+php artisan make:migration create_TABLE_NAME_table
 ```
+**after that, run on terminal**
+```bash
+php artisan migrate
+```
+
+---
 
 ### 6. Creating new Controller:
 Its work Like a middleman. A **Controller** handles user requests and controls the application logic.``` --resource``` will automatically create classes for **CRUD** Operation.
@@ -55,27 +64,18 @@ php artisan make:controller CONTROLLER_NAME --resource
 php artisan make:controller FOLDER_NAME/CONTROLLER_NAME --resource
 ```
 
+---
+
 ### 6. Creating new Modal:
 A Model represents your data and the logic related to that data.
 Think of it like this (real-life analogy):
-* Controller → Manager (decides what to do)
+* Controller → Manager (decides what to do/**CRUD OPERATION**)
 * Model → Data notebook (stores & handles data)
 * View → Screen/UI (shows data)
 ```bash
-php artisan make:controller FOLDER_NAME/CONTROLLER_NAME --resource
+php artisan make:model MODEL_NAME #(model will be singular, like table name is PRODUCTS, model will be PRODUCT)
 ```
 
-## 🗂️ Creating Migration:
-
-Migration is the Table. create a migration means creating a table
-```bash
-php artisan make:migration create_TABLE_NAME_table
-```
-**after that, run on terminal**
-```bash
-php artisan migrate
-```
----
 
 ## 🗂️ Using MailChimp and DrewM package for Storing Mail:
 

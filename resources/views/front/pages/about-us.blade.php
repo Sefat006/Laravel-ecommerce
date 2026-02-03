@@ -1,8 +1,11 @@
 @extends('front.layouts.app')
 
-@section('title', $data->meta_title)
-@section('description', $data->meta_description)
-@section('keywords', $data->meta_keywords)
+<!-- -------------- these are for dynamic meta header -------------------->
+    <!-- used in app.blade.php-- -->
+    @section('title', $data->meta_title)
+    @section('description', $data->meta_description)
+    @section('keywords', $data->meta_keywords)
+<!-- -------------- these are for dynamic meta header -------------------->
 
 @section('content')
     <!-- breadcrumb area start here  -->

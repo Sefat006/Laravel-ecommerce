@@ -33,7 +33,7 @@
 
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="{{ asset('front/assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('front/assets/images/' . get_Settings()->favicon) }}" type="image/x-icon">
 
     <link rel="stylesheet" href="{{ asset('front/assets/css/toastr.css') }}">
 

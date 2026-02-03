@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
+use App\Models\Faq;
 use App\Models\Page;
 use Exception;
 use Illuminate\Http\Request;
@@ -78,7 +79,8 @@ class PagesController extends Controller
 
     public function faq()
     {
-        return view('front.pages.faq'); // resources/views/front/pages/faq.blade.php
+        $faqs = Faq::orderBy('id', 'desc')->get();
+        return view('front.pages.faq', compact('faqs')); // resources/views/front/pages/faq.blade.php
     }
 
     public function termsAndConditions()

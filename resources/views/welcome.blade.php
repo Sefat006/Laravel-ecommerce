@@ -51,101 +51,29 @@
                     </div>
                 </div>
                 <div class="row">
+                    @foreach($categories as $category)
                     <div class="col-lg-4 col-md-6">
                         <a class="single-categorie" href="/product/category/5">
                             <div class="categorie-wrap">
                                 <div class="categorie-icon">
-                                    <i class="icon flaticon-blazer"></i>
+                                    <!-- <i class="icon flaticon-blazer"></i> -->
+                                    <img src="{{ asset('front/assets/images/products/'.$category->icon)}}" alt="">
                                 </div>
                                 <div class="categorie-info">
                                     <h3 class="categorie-name">
-                                        Sports</h3>
+                                        {{ $category->en_category_name }}
+                                    </h3>
                                     <h4 class="categorie-subtitle">
-                                        Sports products</h4>
+                                        {{ $category->en_short_info}}
+                                    </h4>
                                 </div>
                             </div>
                             <i class="arrow flaticon-right-arrow"></i>
                         </a>
                     </div>
-                    <div class="col-lg-4 col-md-6">
-                        <a class="single-categorie" href="/product/category/6">
-                            <div class="categorie-wrap">
-                                <div class="categorie-icon">
-                                    <i class="icon flaticon-blazer"></i>
-                                </div>
-                                <div class="categorie-info">
-                                    <h3 class="categorie-name">
-                                        Blazers Collection</h3>
-                                    <h4 class="categorie-subtitle">
-                                        Dress For Man And Women</h4>
-                                </div>
-                            </div>
-                            <i class="arrow flaticon-right-arrow"></i>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <a class="single-categorie" href="/product/category/7">
-                            <div class="categorie-wrap">
-                                <div class="categorie-icon">
-                                    <i class="icon flaticon-hoodie"></i>
-                                </div>
-                                <div class="categorie-info">
-                                    <h3 class="categorie-name">
-                                        Hoodie Collection</h3>
-                                    <h4 class="categorie-subtitle">
-                                        Dress For Man And Women</h4>
-                                </div>
-                            </div>
-                            <i class="arrow flaticon-right-arrow"></i>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <a class="single-categorie" href="/product/category/8">
-                            <div class="categorie-wrap">
-                                <div class="categorie-icon">
-                                    <i class="icon flaticon-long-sleeve"></i>
-                                </div>
-                                <div class="categorie-info">
-                                    <h3 class="categorie-name">
-                                        Long Sleeve Wear</h3>
-                                    <h4 class="categorie-subtitle">
-                                        Dress For Man And Women</h4>
-                                </div>
-                            </div>
-                            <i class="arrow flaticon-right-arrow"></i>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <a class="single-categorie" href="/product/category/9">
-                            <div class="categorie-wrap">
-                                <div class="categorie-icon">
-                                    <i class="icon flaticon-waistcoat"></i>
-                                </div>
-                                <div class="categorie-info">
-                                    <h3 class="categorie-name">
-                                        Waistcoart Collection</h3>
-                                    <h4 class="categorie-subtitle">
-                                        Dress For Man And Women</h4>
-                                </div>
-                            </div>
-                            <i class="arrow flaticon-right-arrow"></i>
-                        </a>
-                    </div>
-                    <div class="col-lg-4 col-md-6">
-                        <a class="single-categorie" href="/product/category/10">
-                            <div class="categorie-wrap">
-                                <div class="categorie-icon">
-                                    <i class="icon flaticon-long-sleeve"></i>
-                                </div>
-                                <div class="categorie-info">
-                                    <h3 class="categorie-name">
-                                        Long Sleeve Wear</h3>
-                                    <h4 class="categorie-subtitle">
-                                        Dress For Man And Women</h4>
-                                </div>
-                            </div>
-                            <i class="arrow flaticon-right-arrow"></i>
-                        </a>
+                    @endforeach
+                    <div class="categorybtn text-center">
+                            <a href="{{ route('category.all')}}" class="primary-btn">Show All Categories</a>
                     </div>
                 </div>
             </div>

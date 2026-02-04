@@ -2,6 +2,7 @@
 
 
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\Frontend\CategoryController;
 use App\Http\Controllers\Frontend\CheckoutController;
 use App\Http\Controllers\Frontend\CompareController;
 use App\Http\Controllers\Frontend\PagesController;
@@ -30,6 +31,7 @@ Route::get('/about-us', [PagesController::class, 'aboutUs'])->name('about.us');
 Route::get('/contact-us', [PagesController::class, 'contactUs'])->name('contact');
 Route::post('/contact-us', [PagesController::class, 'storeContact'])->name('contact.store');
 Route::get('/faq', [PagesController::class, 'faq'])->name('faq');
+Route::get('/categories', [CategoryController::class, 'index'])->name('category.all');
 Route::get('/terms-conditions', [PagesController::class, 'termsAndConditions'])->name('terms.conditions');
 Route::get('/privacy-policy', [PagesController::class, 'privacyPolicy'])->name('privacy.policy');
 

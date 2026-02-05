@@ -1,5 +1,12 @@
 @extends('front.layouts.app')
 
+<!-- -------------- these are for dynamic meta header -------------------->
+    <!-- used in app.blade.php-- -->
+    @section('title', $data->meta_title)
+    @section('description', $data->meta_description)
+    @section('keywords', $data->meta_keywords)
+<!-- -------------- these are for dynamic meta header -------------------->
+
 @section('content')
     <!-- breadcrumb area start here  -->
     <div class="breadcrumb-area">
@@ -29,7 +36,7 @@
                                     {{ $faq->en_question ?? ""}}
                                 </button>
                             </h2>
-                            <div id="collapse{{$faq->id}}" class="accordion-collapse collapse show" aria-labelledby="heading1"
+                            <div id="collapse{{$faq->id}}" class="accordion-collapse collapse @if($faq->id == 1) show @endif show" aria-labelledby="heading1"
                                 data-bs-parent="#accordionFaq">
                                 <div class="accordion-body">
                                     <p class="faq-text">

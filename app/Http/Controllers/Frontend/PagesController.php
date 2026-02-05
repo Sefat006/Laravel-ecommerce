@@ -79,8 +79,9 @@ class PagesController extends Controller
 
     public function faq()
     {
+        $data = Page::where('slug','faq')->first();
         $faqs = Faq::orderBy('id', 'desc')->get();
-        return view('front.pages.faq', compact('faqs')); // resources/views/front/pages/faq.blade.php
+        return view('front.pages.faq', compact('faqs', 'data')); // resources/views/front/pages/faq.blade.php
     }
 
     public function termsAndConditions()

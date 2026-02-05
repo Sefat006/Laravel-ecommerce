@@ -83,18 +83,11 @@
                                 <div class="search-wrap">
                                     <select class="form-select" name="category">
                                         <option value="" selected>Categories</option>
-                                        <option value="1">
-                                            Health Category
+                                        @foreach(getCategoriesList() as $category)
+                                        <option value="{{ $category->id }}">
+                                            {{ $category->en_category_name }}
                                         </option>
-                                        <option value="2">
-                                            Women Fashion
-                                        </option>
-                                        <option value="3">
-                                            Men Fashion
-                                        </option>
-                                        <option value="4">
-                                            Electronic
-                                        </option>
+                                        @endforeach
                                     </select>
                                     <div class="form-group">
                                         <input type="text" class="form-control" id="search" name="search"
@@ -159,7 +152,7 @@
                         <li class="menu-item menu-item-has-children active">
                             <a class="menu-link" href="{{url('/')}}">Home</a>
                         </li>
-                        <li class="menu-item "><a class="menu-link" href="{{route('product.index')}}">Shop</a>
+                        <li class="menu-item "><a class="menu-link" href="{{route('products.index')}}">Shop</a>
                         </li>
 
                         <li class="menu-item "><a class="menu-link" href="{{ route('about.us')}}">About Us</a>
@@ -228,15 +221,12 @@
                 <form>
                     <div class="search-wrap">
                         <select class="form-select">
-                            <option selected>Categories</option>
-                            <option value="/product/category/1">
-                                Health Category</option>
-                            <option value="/product/category/2">
-                                Women Fashion</option>
-                            <option value="/product/category/3">
-                                Men Fashion</option>
-                            <option value="/product/category/4">
-                                Electronic</option>
+                            <option value="" selected>Categories</option>
+                            @foreach(getCategoriesList() as $category)
+                            <option value="{{ $category->id }}">
+                                {{ $category->en_category_name }}
+                            </option>
+                            @endforeach
                         </select>
                         <div class="form-group">
                             <input type="text" class="form-control" id="mobilesearch" name="search"
@@ -252,7 +242,7 @@
                         <a class="menu-link" href="{{ url('/') }}">Home</a>
                     </li>
                     <li class="menu-item">
-                        <a class="menu-link" href="{{route('product.index')}}">Shop</a>
+                        <a class="menu-link" href="{{route('products.index')}}">Shop</a>
                     </li>
                     <li class="menu-item">
                         <a class="menu-link" href="{{ url('/categories') }}">Categories</a>

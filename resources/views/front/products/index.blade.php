@@ -208,7 +208,7 @@
                                 <div class="col-xl-4 col-lg-6 col-md-4 col-sm-6">
                                     <div class="single-grid-product">
                                         <div class="product-top">
-                                            <a href="/product/single/fit-flare-dress-2"><img class="product-thumbnal"
+                                            <a href="{{ route('product.details' , $product->slug )}}"><img class="product-thumbnal"
                                                     src="{{ asset('front/assets/images/products/' . $product->thumb ) }}" alt="product" /></a>
                                             <!-- <div class="product-flags">
                                             <span class="product-flag sale">NEW</span>
@@ -243,8 +243,9 @@
                                                 <span class="regular-price">$ {{ $product->price }}</span>
                                                 <span class="price">$ {{ $product->discounted_price }}</span>
                                             </div>
-                                            <a href="javascript:void(0)" title="Add To Cart" class="add-cart addCart" data-id="11">Add
-                                                To Cart <i class="icon fas fa-plus-circle"></i></a>
+                                            <a href="javascript:void(0)" title="Add To Cart" class="add-cart addCart" data-id="11">
+                                                Add To Cart <i class="icon fas fa-plus-circle"></i>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

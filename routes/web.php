@@ -38,9 +38,9 @@ Route::get('/privacy-policy', [PagesController::class, 'privacyPolicy'])->name('
 
 // Product Routes
 Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/product/{slug}', [ProductController::class, 'productDetails'])->name('product.details');
 Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
 Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
 Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
 Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
 Route::delete('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');
@@ -58,7 +58,7 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.in
 
 // Cart Routes
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-// Route::post('/cart/add', [CartController::class, 'add'])->name('cart.add');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 // Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
 // Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 

@@ -10,7 +10,8 @@
     <meta name="keywords"
         content="@yield('keywords')" />
     <meta name="author" content="liveprojectacademy" />
-    <meta name="csrf-token" content="z8IzV1IjwBDBzh2xk5mWIRncryxtnW1G2NyKj67x">
+    
+    @stack('meta')
 
     <!-- fonts file -->
     <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600;700;800;900&display=swap"
@@ -67,6 +68,7 @@
             @endforeach
         @endif
     </script>
+    @stack('scripts')
 </body>
 
 </html>

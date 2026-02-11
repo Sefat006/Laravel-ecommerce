@@ -58,4 +58,22 @@ class CartController extends Controller
 
     }
 
+    public function removeFromCart(Request $request)
+    {
+        // Retrieve cart from session
+        $cart = session()->get('cart', []);
+
+        // Get product ID from form input
+        $product_id = $request->input('product_id');
+
+        // Remove the product from the cart
+        if (isset($cart[$product_id])) {
+            unset($cart[$product_id]); // Remove item from array
+            session()->put('cart', $cart); // Update session
+        }
+
+        // Redirect back with success message
+        return redirect()->back()->with('success', 'Product removed from cart!');
+    }
+
 }

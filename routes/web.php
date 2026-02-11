@@ -59,8 +59,8 @@ Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.in
 // Cart Routes
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
+Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 // Route::put('/cart/update/{id}', [CartController::class, 'update'])->name('cart.update');
-// Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 // Checkout Routes
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');

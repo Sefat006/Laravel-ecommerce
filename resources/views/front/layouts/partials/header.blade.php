@@ -275,81 +275,114 @@
         <div class="offcanvas-body">
             <div class="cart-product-list" id="bodyData">
 
-                <!-- Product item start -->
+                @if(session()->has('cart') && count(session('cart')) > 0)
+
+                @foreach(session('cart') as $product_id => $item)
+
                 <div class="product-item cart-product-item">
                     <div class="single-grid-product">
+
+                        <!-- {{-- Product Image --}} -->
                         <div class="product-top">
-                            <a href="javascript:void(0)"><img class="product-thumbnal"
-                                    src="{{ asset('front/assets/images/products/tshirt.png') }}" alt="cart"></a>
+                            <a href="{{ url('product/single/'.$product_id) }}">
+                                <img class="product-thumbnal"
+                                    src="{{ asset('front/assets/images/products/'.$item['image']) }}"
+                                    alt="cart">
+                            </a>
                         </div>
+
                         <div class="product-info">
+
                             <div class="product-name-part">
-                                <h3 class="product-name"><a class="product-link" href="javascript:void(0)">Plaid Cotton
-                                        Shirt</a></h3>
+
+                                <!-- {{-- Product Name --}} -->
+                                <h3 class="product-name">
+                                    <a class="product-link"
+                                        href="{{ url('product/single/'.$product_id) }}">
+                                        {{ $item['name'] }}
+                                    </a>
+                                </h3>
+
+                                <!-- {{-- Quantity Controls --}} -->
                                 <div class="cart-quantity input-group">
                                     <div class="increase-btn dec qtybutton btn qty_decrease"
-                                        data-id="877875226d30b89ecef4738c7e2e9378">-</div>
-                                    <input class="qty-input cart-plus-minus-box qty_value" type="text" name="qtybutton"
-                                        id="qty_value" value="1" readonly />
+                                        data-id="{{ $product_id }}">
+                                        -
+                                    </div>
+
+                                    <input class="qty-input cart-plus-minus-box qty_value"
+                                        type="text"
+                                        value="{{ $item['quantity'] }}"
+                                        readonly />
+
                                     <div class="increase-btn inc qtybutton btn qty_increase"
-                                        data-id="877875226d30b89ecef4738c7e2e9378">+</div>
+                                        data-id="{{ $product_id }}">
+                                        +
+                                    </div>
                                 </div>
-                                <button class="cart-remove-btn deleteItem"
-                                    data-id="877875226d30b89ecef4738c7e2e9378">Remove</button>
+
+                                <!-- {{-- Remove Button --}} -->
+                                <form action="{{ route('cart.remove') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="product_id" value="{{ $product_id }}">
+                                    <style>
+                                        .grow-btn {
+                                            transition: all 0.3s ease;
+                                            /* Makes the transition smooth */
+                                        }
+                                        .grow-btn:hover {
+                                            color: #ff0000 !important;
+                                            /* Forces a bright red */
+                                            border-color: #ff0000 !important;
+                                            transform: scale(1.1);
+                                            /* Makes the button 10% larger */
+                                            cursor: pointer;
+                                        }
+                                    </style>
+                                    <button
+                                        onclick="return confirm('Are you sure?')"
+                                        type="submit"
+                                        class="btn btn-danger cart-remove-btn deleteItem grow-btn">
+                                        Remove
+                                    </button>
+                                </form>
+
+
                             </div>
+
+                            <!-- {{-- Price --}} -->
                             <div class="product-price">
+
                                 <span class="regular-price me-0">
-                                    $ 100
+                                    $ {{ number_format($item['regularPrice'], 2) }}
                                 </span>
+
+                                @if($item['discountedPrice'])
                                 <span class="price">
-                                    $ 90
+                                    $ {{ number_format($item['discountedPrice'], 2) }}
                                 </span>
+                                @endif
+
                             </div>
+
                         </div>
                     </div>
                 </div>
-                <!-- Product item end -->
-                <!-- Product item start -->
-                <div class="product-item cart-product-item">
-                    <div class="single-grid-product">
-                        <div class="product-top">
-                            <a href="javascript:void(0)"><img class="product-thumbnal"
-                                    src="{{ asset('front/assets/images/products/tshirt.png') }}" alt="cart"></a>
-                        </div>
-                        <div class="product-info">
-                            <div class="product-name-part">
-                                <h3 class="product-name"><a class="product-link" href="javascript:void(0)">Rosmo
-                                        Namino</a></h3>
-                                <div class="cart-quantity input-group">
-                                    <div class="increase-btn dec qtybutton btn qty_decrease"
-                                        data-id="5fe6269ce66b4dd14584eb9b1b633eeb">-</div>
-                                    <input class="qty-input cart-plus-minus-box qty_value" type="text" name="qtybutton"
-                                        id="qty_value" value="1" readonly />
-                                    <div class="increase-btn inc qtybutton btn qty_increase"
-                                        data-id="5fe6269ce66b4dd14584eb9b1b633eeb">+</div>
-                                </div>
-                                <button class="cart-remove-btn deleteItem"
-                                    data-id="5fe6269ce66b4dd14584eb9b1b633eeb">Remove</button>
-                            </div>
-                            <div class="product-price">
-                                <span class="regular-price me-0">
-                                    $ 500
-                                </span>
-                                <span class="price">
-                                    $ 450
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- Product item end -->
+
+                @endforeach
+
+                @else
+                <p>Your cart is empty.</p>
+                @endif
 
             </div>
 
             <div class="total-bottom-part">
                 <div class="total-count d-flex">
                     <h3>Total</h3>
-                    <h4 class="totalAmount"> $ 540</h4>
+                    <h4 class="totalAmount">
+                        $ $ {{ number_format(collect(session('cart', []))->sum(fn($item) =>  ($item['discountedPrice'] ?? $item['regularPrice']) * $item['quantity']), 2) }}
+                    </h4>
                 </div>
                 <a href="checkout.html" class="proceed-to-btn d-block text-center">
                     Proceed To Checkout

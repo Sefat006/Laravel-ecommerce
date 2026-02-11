@@ -68,7 +68,7 @@
             @endforeach
         @endif
     </script>
-    @stack('scripts')
+    @stack('scripts') <!-- From welcome.blade.php -->
 </body>
 
 </html>

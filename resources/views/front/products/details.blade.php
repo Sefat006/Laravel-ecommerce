@@ -124,8 +124,8 @@
                                 </div>
                                 <div class="product-bottom-button d-flex">
                                     <a href="javascript:void(0)" class="primary-btn buyNow" data-id="5">Buy Now</a>
-                                    <a href="javascript:void(0)" title="Add To Cart" class="add-cart addCart"
-                                        data-id="5">Add To Cart
+                                    <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart"
+                                        data-id="{{ $product->id }}">Add To Cart
                                         <i class="icon fas fa-plus-circle"></i></a>
                                 </div>
                             </div>
@@ -305,11 +305,10 @@
                                 <li class="review-item"><i class="flaticon-star"></i></li>
                             </ul>
                             <div class="product-price">
-                                <span class="regular-price">$ {{ $relatedProduct->price }}</span>
-                                <span class="price">$ {{ $relatedProduct->discounted_price }}</span>
+                                <span class="regular-price">$ {{ $relatedProduct->price ?? "" }}</span>
+                                <span class="price">$ {{ $relatedProduct->discounted_price ?? "" }}</span>
                             </div>
-                            <a href="javascript:void(0)" title="Add To Cart" class="add-cart addCart" data-id="11">Add
-                                To Cart <i class="icon fas fa-plus-circle"></i></a>
+                            <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $relatedProduct->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
                         </div>
                     </div>
                 </div>
@@ -319,3 +318,42 @@
     </div>
 
 @endsection
+
+@push('scripts') <!-- to app.blade.php, all the pages where "Add to Cart" button is placed -->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.addToCart').on('click', function(e) {
+            e.preventDefault();
+            var productId = $(this).data('id');
+
+            $.ajax({
+                url: "{{ route('cart.add') }}",
+                method: "POST",
+                data: {
+                    product_id: productId,
+                    quantity: 1,
+                    _token: "{{ csrf_token() }}"
+                },
+                success: function(response) {
+                    if (response.status === 'success') {
+                        // ✅ Update cart icon number
+                        $('.totalCountItem').text(response.cart_count);
+
+                        // ✅ Update total cart amount
+                        $('.totalAmount').text('$' + response.total_price);
+
+                        // ✅ Show success message using Toastr
+                        toastr.success('Product added to cart!', 'Success');
+                    } else {
+                        toastr.error(response.message, 'Error');
+                    }
+                },
+                error: function() {
+                    toastr.error('Something went wrong!', 'Error');
+                }
+            });
+        });
+    });
+</script>
+
+@endpush

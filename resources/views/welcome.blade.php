@@ -147,11 +147,10 @@ $newarrival = $data['newarrival'];
                             <li class="review-item"><i class="flaticon-star"></i></li>
                         </ul>
                         <div class="product-price">
-                            <span class="regular-price">$ {{ $product->price }}</span>
-                            <span class="price">$ {{ $product->discounted_price }}</span>
+                            <span class="regular-price">$ {{ $product->price ?? "" }}</span>
+                            <span class="price">$ {{ $product->discounted_price ?? "" }}</span>
                         </div>
-                        <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $product->id }}">
-                            Add To Cart <i class="icon fas fa-plus-circle"></i>
+                        <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $product->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i>
                         </a>
                     </div>
                 </div>
@@ -182,10 +181,10 @@ $newarrival = $data['newarrival'];
             @foreach($testimonials as $testimonial)
             <div class="single-story-box">
                 <img src="{{ asset('front/assets/images/'.$testimonial->image) }}" class="avatar" alt="Testimonial">
-                <h3 class="story-title">{{$testimonial->name}} <span class="story-year">{{ $testimonial->profession }}</span>
+                <h3 class="story-title">{{$testimonial->name}} <span class="story-year">{{ $testimonial->profession ?? "" }}</span>
                 </h3>
                 <p class="story-content">
-                    {{ $testimonial->review }}
+                    {{ $testimonial->review ?? "" }}
                 </p>
             </div>
             @endforeach
@@ -275,11 +274,10 @@ $newarrival = $data['newarrival'];
                                     <li class="review-item"><i class="flaticon-star"></i></li>
                                 </ul>
                                 <div class="product-price">
-                                    <span class="regular-price">$ {{ $newarrival->price }}</span>
-                                    <span class="price">$ {{ $newarrival->discounted_price }}</span>
+                                    <span class="regular-price">$ {{ $newarrival->price ?? "" }}</span>
+                                    <span class="price">$ {{ $newarrival->discounted_price ?? "" }}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="11">Add
-                                    To Cart <i class="icon fas fa-plus-circle"></i></a>
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $newarrival->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
                             </div>
                         </div>
                     </div>
@@ -324,11 +322,10 @@ $newarrival = $data['newarrival'];
                                     <li class="review-item"><i class="flaticon-star"></i></li>
                                 </ul>
                                 <div class="product-price">
-                                    <span class="regular-price">$ {{ $bestselling->price }}</span>
-                                    <span class="price">$ {{ $bestselling->discounted_price }}</span>
+                                    <span class="regular-price">$ {{ $bestselling->price ?? "" }}</span>
+                                    <span class="price">$ {{ $bestselling->discounted_price ?? ""}}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="11">Add
-                                    To Cart <i class="icon fas fa-plus-circle"></i></a>
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $bestselling->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
                             </div>
                         </div>
                     </div>
@@ -373,11 +370,10 @@ $newarrival = $data['newarrival'];
                                     <li class="review-item"><i class="flaticon-star"></i></li>
                                 </ul>
                                 <div class="product-price">
-                                    <span class="regular-price">$ {{ $onsale->price }}</span>
-                                    <span class="price">$ {{ $onsale->discounted_price }}</span>
+                                    <span class="regular-price">$ {{ $onsale->price ?? ""}}</span>
+                                    <span class="price">$ {{ $onsale->discounted_price ?? ""}}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="11">Add
-                                    To Cart <i class="icon fas fa-plus-circle"></i></a>
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $onsale->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
                             </div>
                         </div>
                     </div>
@@ -422,11 +418,10 @@ $newarrival = $data['newarrival'];
                                     <li class="review-item"><i class="flaticon-star"></i></li>
                                 </ul>
                                 <div class="product-price">
-                                    <span class="regular-price">$ {{ $featured->price }}</span>
-                                    <span class="price">$ {{ $featured->discounted_price }}</span>
+                                    <span class="regular-price">$ {{ $featured->price ?? ""}}</span>
+                                    <span class="price">$ {{ $featured->discounted_price ?? ""}}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="11">
-                                    Add To Cart <i class="icon fas fa-plus-circle"></i>
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="$featured->id">Add To Cart <i class="icon fas fa-plus-circle"></i>
                                 </a>
                             </div>
                         </div>
@@ -451,7 +446,7 @@ $newarrival = $data['newarrival'];
 
 @endsection
 
-@push('scripts')
+@push('scripts') <!-- to app.blade.php, all the pages where "Add to Cart" button is placed -->
 <script type="text/javascript">
     $(document).ready(function() {
         $('.addToCart').on('click', function(e) {

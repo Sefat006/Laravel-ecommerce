@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
+use App\Models\Color;
 use App\Models\Gallery;
 use App\Models\Page;
 use App\Models\Product;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -18,6 +20,8 @@ class ProductController extends Controller
         $data = Page::where('slug','products')->first();
         $categories = Category::where('status', 1)->get();
         $brands = Brand::where('status', 1)->get();
+        $colors = Color::all();
+        $sizes = Size::all();
 
         $query = Product::where('status', 1);
 
@@ -51,7 +55,7 @@ class ProductController extends Controller
 
         $products = $query->paginate(6);
 
-        return view('front.products.index', compact('categories', 'brands', 'products', 'data'));
+        return view('front.products.index', compact('data', 'categories', 'brands', 'products', 'colors', 'sizes'));
     }
     
     public function productDetails($slug)
@@ -73,6 +77,8 @@ class ProductController extends Controller
     {
         $categories = Category::where('status', 1)->get();
         $brands = Brand::where('status', 1)->get();
+        $colors = Color::all();
+        $sizes = Size::all();
 
         $selectedCat = Category::where('status', 1)->where('slug', $slug)->first();
 
@@ -80,6 +86,6 @@ class ProductController extends Controller
             ->where('category_id', $selectedCat->id)
             ->paginate(6);
 
-        return view('front.products.bycategory', compact('categories', 'brands', 'products', 'selectedCat'));
+        return view('front.products.bycategory', compact('categories', 'brands', 'products', 'selectedCat', 'colors', 'sizes'));
     }
 }

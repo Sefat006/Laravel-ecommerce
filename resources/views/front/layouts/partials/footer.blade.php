@@ -40,14 +40,13 @@
                                 <div class="single-widget">
                                     <h3 class="widget-title">Categories</h3>
                                     <ul class="widget-menu show">
-                                        <li class="menu-item"><a class="menu-link" href="#">Health Category</a>
+                                        @foreach( getCategoriesList() as $category)
+                                        <li class="menu-item">
+                                            <a class="menu-link" href="{{ route('products.byCategory', $category->slug)}}">
+                                                {{$category->en_category_name}}
+                                            </a>
                                         </li>
-                                        <li class="menu-item"><a class="menu-link" href="#">Women Fashion</a>
-                                        </li>
-                                        <li class="menu-item"><a class="menu-link" href="#">Men Fashion</a>
-                                        </li>
-                                        <li class="menu-item"><a class="menu-link" href="#">Electronic</a>
-                                        </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>

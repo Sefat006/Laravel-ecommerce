@@ -318,8 +318,8 @@
     </div>
 
 @endsection
-
-@push('scripts') <!-- to app.blade.php, all the pages where "Add to Cart" button is placed -->
+<!-- 
+@push('scripts') 
 <script type="text/javascript">
     $(document).ready(function() {
         $('.addToCart').on('click', function(e) {
@@ -356,4 +356,4 @@
     });
 </script>
 
-@endpush
+@endpush -->

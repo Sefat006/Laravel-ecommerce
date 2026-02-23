@@ -65,7 +65,7 @@ $newarrival = $data['newarrival'];
         <div class="row">
             @foreach($categories as $category)
             <div class="col-lg-4 col-md-6">
-                <a class="single-categorie" href="/product/category/5">
+                <a class="single-categorie" href="{{ route('products.byCategory', $category->slug)}}">
                     <div class="categorie-wrap">
                         <div class="categorie-icon">
                             <!-- <i class="icon flaticon-blazer"></i> -->
@@ -448,6 +448,7 @@ $newarrival = $data['newarrival'];
 
 @push('scripts') <!-- to app.blade.php, all the pages where "Add to Cart" button is placed -->
 <script type="text/javascript">
+
     $(document).ready(function() {
         $('.addToCart').on('click', function(e) {
             e.preventDefault();
@@ -481,6 +482,7 @@ $newarrival = $data['newarrival'];
             });
         });
     });
+
 </script>
 
 @endpush

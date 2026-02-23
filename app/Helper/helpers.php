@@ -20,7 +20,7 @@ if (!function_exists('getCategoriesList')) {
     {
         return Cache::remember('categories_list', 60, function () {
 
-            return Category::where('status', 1)->orderBy('en_category_name', 'ASC')->get();
+            return Category::where('status', 1)->orderBy('en_category_name', 'ASC')->limit(6)->get();
 
         });
     }

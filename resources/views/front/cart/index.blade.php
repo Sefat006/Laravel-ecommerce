@@ -184,3 +184,73 @@
 <!-- wish-list area end here  -->
 
 @endsection
+
+@push('scripts')
+<script>
+    $(document).ready(function() {
+        // Increase quantity
+        $('.qty_increase').click(function(e) {
+            e.preventDefault();
+            let productId = $(this).data('id');
+            let qtyInput = $(this).siblings('.qty-input'); // Get the input field for the quantity
+            let currentQty = parseInt(qtyInput.val());
+
+            $.ajax({
+                url: "{{ route('cart.increase') }}", // URL for the increase route
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}", // CSRF token for security
+                    product_id: productId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Increase quantity by 1 and update the input field
+                        qtyInput.val(currentQty + 1);
+                        toastr.success('Product added to cart!', 'Success');
+                        window.location.reload();
+                    } else {
+                       toastr.error('Product is not increased!', 'Error');
+                    }
+                },
+                error: function() {
+                    toastr.error('Something went wrong!', 'Error');
+                }
+            });
+        });
+
+        // Decrease quantity
+        $('.qty_decrease').click(function(e) {
+            e.preventDefault();
+            let productId = $(this).data('id');
+            let qtyInput = $(this).siblings('.qty-input'); // Get the input field for the quantity
+            let currentQty = parseInt(qtyInput.val());
+
+            $.ajax({
+                url: "{{ route('cart.decrease') }}", // URL for the decrease route
+                type: "POST",
+                data: {
+                    _token: "{{ csrf_token() }}", // CSRF token for security
+                    product_id: productId
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Decrease quantity by 1 if greater than 1
+                        if (currentQty > 1) {
+                            toastr.success('Product is removed from cart!', 'Success');
+                            window.location.reload();
+                        } else {
+                            toastr.error('Product is removed from cart!!', 'Error');
+                            window.location.reload();
+                        }
+                    } else {
+                        toastr.error("Unable to decrease quantity.", "Error");
+                    }
+                },
+                error: function() {
+                    alert("An error occurred.");
+                }
+            });
+        });
+    });
+</script>
+@endpush

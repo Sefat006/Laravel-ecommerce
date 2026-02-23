@@ -2,9 +2,9 @@
 
 <!-- -------------- these are for dynamic meta header -------------------->
     <!-- used in app.blade.php-- -->
-    @section('title', $data->meta_title)
-    @section('description', $data->meta_description)
-    @section('keywords', $data->meta_keywords)
+    @section('title', $selectedCat->meta_title)
+    @section('description', $selectedCat->meta_description)
+    @section('keywords', $selectedCat->meta_keywords)
 <!-- -------------- these are for dynamic meta header -------------------->
 
 
@@ -14,12 +14,12 @@
     <div class="breadcrumb-area">
         <div class="container">
             <div class="breadcrumb-wrap text-center">
-                <h2 class="page-title">{{ $data->title }}</h2>
+                <h2 class="page-title">{{ $selectedCat->meta_title }}</h2>
                 <ul class="breadcrumb-pages">
                     <li class="page-item">
                         <a class="page-item-link" href="{{ url('/') }}">Home</a>
                     </li>
-                    <li class="page-item">{{ $data->title }}</li>
+                    <li class="page-item">{{ $selectedCat->meta_title }}</li>
                 </ul>
             </div>
         </div>

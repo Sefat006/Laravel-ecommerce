@@ -37,30 +37,17 @@ class ProductController extends Controller
         return view('front.products.details', compact('product', 'relatedProducts', 'productImages'));
     }
 
-    // public function create()
-    // {
-    //     // Show create product form (if needed)
-    // }
+    public function productsByCategory($slug)
+    {
+        $categories = Category::where('status', 1)->get();
+        $brands = Brand::where('status', 1)->get();
 
-    // public function store(Request $request)
-    // {
-    //     // Save new product
-    // }
+        $selectedCat = Category::where('status', 1)->where('slug', $slug)->first();
 
-    // public function edit($id)
-    // {
-    //     // Show edit form
-    // }
+        $products = Product::where('status', 1)
+            ->where('category_id', $selectedCat->id)
+            ->paginate(6);
 
-    // public function update(Request $request, $id)
-    // {
-    //     // Update product
-    // }
-
-    // public function destroy($id)
-    // {
-    //     // Delete product
-    //     Product::destroy($id);
-    //     return redirect()->back()->with('success', 'Product deleted!');
-    // }
+        return view('front.products.bycategory', compact('categories', 'brands', 'products', 'selectedCat'));
+    }
 }

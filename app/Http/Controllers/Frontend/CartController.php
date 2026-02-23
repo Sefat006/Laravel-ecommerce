@@ -76,4 +76,42 @@ class CartController extends Controller
         return redirect()->back()->with('success', 'Product removed from cart!');
     }
 
+    // Increase Quantity
+    public function increaseQuantity(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $product_id = $request->input('product_id');
+
+        if (isset($cart[$product_id])) {
+            // Increase quantity by 1
+            $cart[$product_id]['quantity']++;
+            session()->put('cart', $cart);
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
+    // Decrease Quantity
+    public function decreaseQuantity(Request $request)
+    {
+        $cart = session()->get('cart', []);
+        $product_id = $request->input('product_id');
+
+        if (isset($cart[$product_id])) {
+            if ($cart[$product_id]['quantity'] > 1) {
+                // Decrease quantity by 1
+                $cart[$product_id]['quantity']--;
+            } else {
+                // Remove item from cart if quantity is 1
+                unset($cart[$product_id]);
+            }
+
+            session()->put('cart', $cart);
+            return response()->json(['success' => true]);
+        }
+
+        return response()->json(['success' => false]);
+    }
+
 }

@@ -12,14 +12,46 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         // Show all products
         $data = Page::where('slug','products')->first();
         $categories = Category::where('status', 1)->get();
         $brands = Brand::where('status', 1)->get();
-        $products = Product::where('status', 1)->latest()->paginate(6);
-        return view('front.products.index', compact('categories', 'brands', 'products', 'data')); // this is the folder from resources/view/front/products/index.blade.html
+
+        $query = Product::where('status', 1);
+
+        if ($request->has('keywords') && !empty($request->keywords)) {
+            $query->where('en_name', 'LIKE', '%' . $request->keywords . '%');
+        }
+
+        // Price Range min
+        if ($request->has('min_price') && !empty($request->min_price)) {
+            $query->whereRaw(
+                '(CASE 
+            WHEN discounted_price IS NOT NULL 
+            THEN discounted_price 
+            ELSE price 
+        END) >= ?',
+                [$request->min_price]
+            );
+        }
+
+        // Price Range Maximum
+        if ($request->has('max_price') && !empty($request->max_price)) {
+            $query->whereRaw(
+                '(CASE 
+            WHEN discounted_price IS NOT NULL 
+            THEN discounted_price 
+            ELSE price 
+        END) <= ?',
+                [$request->max_price]
+            );
+        }
+
+        $products = $query->paginate(6);
+
+        return view('front.products.index', compact('categories', 'brands', 'products', 'data'));
     }
     
     public function productDetails($slug)

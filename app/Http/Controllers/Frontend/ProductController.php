@@ -61,7 +61,7 @@ class ProductController extends Controller
     public function productDetails($slug)
     {
         // Show single product
-        $product = Product::where('slug', $slug)->where('status', 1)->first();
+        $product = Product::with('colors')->with('sizes')->where('slug', $slug)->where('status', 1)->first();
 
         $relatedProducts = Product::where('category_id', $product->category_id)
             ->where('status', 1)

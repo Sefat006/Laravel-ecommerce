@@ -18,6 +18,8 @@ class CartController extends Controller
 
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity', 1);
+        $color = $request->input('color'); // <-- add this
+        $size = $request->input('size');   // <-- add this
 
         $product = Product::find($product_id);
 
@@ -37,7 +39,9 @@ class CartController extends Controller
                 "regularPrice" => $product->price,
                 "discountedPrice" => $product->discounted_price,
                 "image" => $product->thumb,
-                "quantity" => $quantity
+                "quantity" => $quantity,
+                "color" => $color,
+                "size" => $size,
             ];
         }
 

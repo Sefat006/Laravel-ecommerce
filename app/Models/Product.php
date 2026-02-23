@@ -32,4 +32,13 @@ class Product extends Model
     public function category() {
         return $this->belongsTo(Category::class, 'category_id');
     }
+
+    // for product Details color and size variants
+    // add these two on productController productDetails func using with();
+    public function colors() {
+        return $this->belongsToMany(Color::class, 'color_product', 'product_id');
+    }
+    public function sizes() {
+        return $this->belongsToMany(Size::class, 'size_product', 'product_id');
+    }
 }

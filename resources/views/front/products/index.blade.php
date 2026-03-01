@@ -53,6 +53,10 @@
                                     <i class="flaticon-search"></i>
                                 </button>
                             </div>
+                            <input type="hidden" id="minPrice" name="min_price"
+                                min="1" value="{{ request('min_price') }}" />
+                            <input type="hidden" id="maxPrice" name="max_price"
+                                value="{{ request('max_price') }}" />
                         </form>
                     </div>
 
@@ -75,6 +79,10 @@
                     <div class="single-widget price-widget">
                         <h3 class="widget-title">Price</h3>
                         <form method="GET" action="{{ route('products.index') }}">
+                            <input type="hidden"
+                                id="searchwidget"
+                                name="keywords"
+                                value="{{ request('keywords') }}" />
                             <div class="price-wrap">
                                 <div class="price-wrap-left">
                                     <div class="single-price">
@@ -126,8 +134,9 @@
                             @foreach($brands as $brand)
                             <div class="single-brand">
                                 <div class="brand-left">
-                                    <input class="form-check-input CheckBrand" type="checkbox" value="Circle">
-                                    <label class="form-check-label" for="Renuar">{{$brand->en_brand_name}}</label>
+                                    <input class="form-check-input CheckBrand" type="checkbox" value="{{$brand->id}}"
+                                    @if(request()->has('brands') && in_array($brand->id, explode(',', request('brands')))) checked @endif>
+                                    <label class="form-check-label" for="Renuar">{{$brand->en_brand_name ?? ""}}</label>
                                 </div>
                                 <span class="brand-count">{{ $brand->prd_count }}</span>
                             </div>
@@ -283,6 +292,43 @@
             if (slug) {
                 let newUrl = "{{ url('/category') }}/" + slug;
                 window.location.href = newUrl;
+            }
+        });
+    });
+
+
+    // brand filtering js
+    $(document).ready(function() {
+        $('.CheckBrand').on('change', function() {
+            let selectedBrands = [];
+
+            // Get all checked brand IDs
+            $('.CheckBrand:checked').each(function() {
+                selectedBrands.push($(this).val());
+            });
+
+            // Get existing query parameters
+            let url = new URL(window.location.href);
+            let params = new URLSearchParams(url.search);
+
+            // Ensure default filters exist if not present
+            if (!params.has('keywords')) params.set('keywords', '');
+            if (!params.has('min_price')) params.set('min_price', '');
+            if (!params.has('max_price')) params.set('max_price', '');
+
+            // Manually construct the query string
+            params.delete('brands'); // Remove existing brand param
+
+            if (selectedBrands.length > 0) {
+                let newParams = params.toString();
+                let newUrl = url.origin + url.pathname + '?' + newParams + '&brands=' + selectedBrands.join(',');
+
+                // Remove unnecessary '&' at the end
+                newUrl = newUrl.replace(/[?&]$/, '');
+
+                window.location.href = newUrl;
+            } else {
+                window.location.href = url.origin + url.pathname + '?' + params.toString();
             }
         });
     });

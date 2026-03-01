@@ -53,6 +53,11 @@ class ProductController extends Controller
             );
         }
 
+        if ($request->has('brands') && !empty($request->brands)) {
+            $brandsId = explode(',', $request->brands);
+            $query->whereIn('brand_id', $brandsId);
+        }
+
         $products = $query->paginate(6);
 
         return view('front.products.index', compact('data', 'categories', 'brands', 'products', 'colors', 'sizes'));

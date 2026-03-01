@@ -38,7 +38,7 @@
                             </h2>
                         </div>
                         <div class="col-md-6 align-self-end text-md-end">
-                            <a href="{{ route('product.index')}}" class="primary-btn">View All Products</a>
+                            <a href="{{ route('products.index')}}" class="primary-btn">View All Products</a>
                         </div>
                     </div>
                 </div>

@@ -70,3 +70,7 @@ Route::post('/checkout/process', [CheckoutController::class, 'process'])->name('
 
 // Subscribe Routes
 Route::post('/subscribe', [SubscriberController::class, 'store'])->name('subscriber.store');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

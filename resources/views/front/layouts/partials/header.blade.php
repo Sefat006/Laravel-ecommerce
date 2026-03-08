@@ -51,7 +51,7 @@
                             <div class="account-switcher">
                                 <span class="flag"><img src="{{ asset('front/assets/images/user-avatar11.png')}}"
                                         alt="fashionwave"></span>
-                                <a href="signin.html" class="lang">My Account</a>
+                                <a href="{{ route('login')}}" class="lang">My Account</a>
                                 <!-- <span class="flag">
                                     <img src="data:image/png;base64,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"
                                         alt="Fashionwave">
@@ -75,22 +75,22 @@
             <div class="container">
                 <div class="header-middle-wrap">
                     <div class="brand-area">
-                        <a class="brand-logo" href="index.html"><img class="brand-image"
+                        <a class="brand-logo" href="/"><img class="brand-image"
                                 src="{{ asset('front/assets/images/logo.png')}}" alt="Fashionwave" /></a>
                     </div>
                     <div class="search-area">
-                        <form action="#" method="get">
+                        <form action="{{ route('products.index')}}" method="Get">
                             <div class="search-wrap">
                                 <select class="form-select" name="category">
                                     <option value="" selected>Categories</option>
                                     @foreach(getCategoriesList() as $category)
-                                    <option value="{{ $category->id }}">
+                                    <option @if(request()->has('category') && $category->id == request('category')) selected @endif value="{{ $category->id }}">
                                         {{ $category->en_category_name }}
                                     </option>
                                     @endforeach
                                 </select>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="search" name="search"
+                                    <input type="text" value="{{ request('keywords')}}" class="form-control" id="keywords" name="keywords"
                                         placeholder="Search Here" />
                                     <button type="submit" class="search-btn"><i
                                             class="flaticon-search"></i></button>
@@ -195,7 +195,7 @@
                         aria-controls="cartOffcanvasSidebar" class="cart-btn header-btn">
                         <div class="btn-left">
                             <i class="btn-icon flaticon-shopping-bag"></i>
-                            <span class="count totalCountItem">2</span>
+                            <span class="count totalCountItem">{{ count(session('cart', [])) }}</span>
                         </div>
                     </a>
                     <button class="menu-bar" type="button" data-bs-toggle="offcanvas"
@@ -219,20 +219,29 @@
                 aria-label="Close"></button>
         </div>
         <div class="menu-search-form">
-            <form>
+            <form action="{{ route('products.index') }}" method="GET">
                 <div class="search-wrap">
-                    <select class="form-select">
+                    <select class="form-select" name="category">
                         <option value="" selected>Categories</option>
                         @foreach(getCategoriesList() as $category)
-                        <option value="{{ $category->id }}">
+                        <option value="{{ $category->id }}"
+                           @if(request()->has('category') && $category->id) selected @endif>
                             {{ $category->en_category_name }}
                         </option>
                         @endforeach
                     </select>
+
                     <div class="form-group">
-                        <input type="text" class="form-control" id="mobilesearch" name="search"
+                        <input type="text"
+                            class="form-control"
+                            id="mobilesearch"
+                            name="keywords"
+                            value="{{ request('keywords') }}"
                             placeholder="Search Here" />
-                        <button type="button" class="search-btn"><i class="flaticon-search"></i></button>
+
+                        <button type="submit" class="search-btn">
+                            <i class="flaticon-search"></i>
+                        </button>
                     </div>
                 </div>
             </form>
@@ -330,6 +339,7 @@
                                         transition: all 0.3s ease;
                                         /* Makes the transition smooth */
                                     }
+
                                     .grow-btn:hover {
                                         color: #ff0000 !important;
                                         /* Forces a bright red */

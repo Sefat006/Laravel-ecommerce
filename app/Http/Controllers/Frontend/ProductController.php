@@ -10,6 +10,7 @@ use App\Models\Gallery;
 use App\Models\Page;
 use App\Models\Product;
 use App\Models\Size;
+use GuzzleHttp\Psr7\Query;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -27,6 +28,10 @@ class ProductController extends Controller
 
         if ($request->has('keywords') && !empty($request->keywords)) {
             $query->where('en_name', 'LIKE', '%' . $request->keywords . '%');
+        }
+
+        if ($request->has('category') && !empty($request->category)) {
+            $query->where('category_id', $request->category);
         }
 
         // Price Range min
@@ -63,7 +68,7 @@ class ProductController extends Controller
         return view('front.products.index', compact('data', 'categories', 'brands', 'products', 'colors', 'sizes'));
     }
     
-    public function productDetails($slug)
+    public function productDetails( $slug)
     {
         // Show single product
         $product = Product::with('colors')->with('sizes')->where('slug', $slug)->where('status', 1)->first();
@@ -78,7 +83,7 @@ class ProductController extends Controller
         return view('front.products.details', compact('product', 'relatedProducts', 'productImages'));
     }
 
-    public function productsByCategory($slug)
+    public function productsByCategory(Request $request, $slug)
     {
         $categories = Category::where('status', 1)->get();
         $brands = Brand::where('status', 1)->get();
@@ -87,9 +92,46 @@ class ProductController extends Controller
 
         $selectedCat = Category::where('status', 1)->where('slug', $slug)->first();
 
-        $products = Product::where('status', 1)
-            ->where('category_id', $selectedCat->id)
-            ->paginate(6);
+        $query = Product::where('status', 1)->where('category_id', $selectedCat->id);
+
+        if ($request->has('keywords') && !empty($request->keywords)) {
+            $query->where('en_name', 'LIKE', '%' . $request->keywords . '%');
+        }
+
+        if ($request->has('category') && !empty($request->category)) {
+            $query->where('category_id', $request->category);
+        }
+
+        // Price Range min
+        if ($request->has('min_price') && !empty($request->min_price)) {
+            $query->whereRaw(
+                '(CASE 
+            WHEN discounted_price IS NOT NULL 
+            THEN discounted_price 
+            ELSE price 
+        END) >= ?',
+                [$request->min_price]
+            );
+        }
+
+        // Price Range Maximum
+        if ($request->has('max_price') && !empty($request->max_price)) {
+            $query->whereRaw(
+                '(CASE 
+            WHEN discounted_price IS NOT NULL 
+            THEN discounted_price 
+            ELSE price 
+        END) <= ?',
+                [$request->max_price]
+            );
+        }
+
+        if ($request->has('brands') && !empty($request->brands)) {
+            $brandsId = explode(',', $request->brands);
+            $query->whereIn('brand_id', $brandsId);
+        }
+
+        $products = $query->paginate(6);
 
         return view('front.products.bycategory', compact('categories', 'brands', 'products', 'selectedCat', 'colors', 'sizes'));
     }

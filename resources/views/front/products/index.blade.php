@@ -29,8 +29,21 @@
 <!-- Product Area Start -->
 <div class="product-area section">
     <div class="container">
+
+        <!-- Mobile Filter Button -->
+        <div class="d-lg-none mb-3">
+            <button class="btn btn-outline-secondary w-100"
+                type="button"
+                data-bs-toggle="offcanvas"
+                data-bs-target="#mobileFilters"
+                aria-controls="mobileFilters">
+                <i class="fas fa-filter me-2"></i> Filters
+            </button>
+        </div>
+
         <div class="row">
             <div class="col-xl-3 col-lg-4">
+
                 <div class="sidebar-widget-area mobile-sidebar">
                     <div class="sidebar-widget-header d-block d-lg-none">
                         <div class="widget-header-wrap">
@@ -135,7 +148,7 @@
                             <div class="single-brand">
                                 <div class="brand-left">
                                     <input class="form-check-input CheckBrand" type="checkbox" value="{{$brand->id}}"
-                                    @if(request()->has('brands') && in_array($brand->id, explode(',', request('brands')))) checked @endif>
+                                        @if(request()->has('brands') && in_array($brand->id, explode(',', request('brands')))) checked @endif>
                                     <label class="form-check-label" for="Renuar">{{$brand->en_brand_name ?? ""}}</label>
                                 </div>
                                 <span class="brand-count">{{ $brand->prd_count }}</span>
@@ -145,7 +158,135 @@
                     </div>
 
                 </div>
+
+                <!-- Mobile: Offcanvas -->
+                <div class="offcanvas offcanvas-start d-lg-none"
+                    tabindex="-1"
+                    id="mobileFilters"
+                    aria-labelledby="mobileFiltersLabel">
+
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="mobileFiltersLabel">Filters</h5>
+                        <button type="button"
+                            class="btn-close text-reset"
+                            data-bs-dismiss="offcanvas"
+                            aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body p-0">
+                        <div class="sidebar-widget-area">
+
+                            <div class="single-widget search-widget">
+                                <h3 class="widget-title">Search Here</h3>
+                                <form method="GET" action="{{ route('products.index') }}">
+                                    <div class="form-group">
+                                        <input type="text"
+                                            class="form-control"
+                                            id="searchwidget"
+                                            name="keywords"
+                                            placeholder="Search products..."
+                                            value="{{ request('keywords') }}" />
+                                        <button type="submit" class="search-btn">
+                                            <i class="flaticon-search"></i>
+                                        </button>
+                                    </div>
+                                    <input type="hidden" id="minPrice" name="min_price"
+                                        min="1" value="{{ request('min_price') }}" />
+                                    <input type="hidden" id="maxPrice" name="max_price"
+                                        value="{{ request('max_price') }}" />
+                                </form>
+                            </div>
+
+                            <!-- <div class="single-widget categories-widget">
+                        <h3 class="widget-title">Categories</h3>
+                        <div class="categories-list">
+                            @foreach($categories as $category)
+                            <div class="single-categorie">
+                                <div class="categorie-left">
+                                    <input class="form-check-input CheckCategory" type="checkbox"
+                                        value="{{ $category->en_category_name }}">
+                                    <label class="form-check-label">{{$category->en_category_name}}</label>
+                                </div>
+                                <span class="categories-count">{{ $category->prd_count}}</span>
+                            </div>
+                            @endforeach
+                        </div>
+                    </div> -->
+
+                            <div class="single-widget price-widget">
+                                <h3 class="widget-title">Price</h3>
+                                <form method="GET" action="{{ route('products.index') }}">
+                                    <input type="hidden"
+                                        id="searchwidget"
+                                        name="keywords"
+                                        value="{{ request('keywords') }}" />
+                                    <div class="price-wrap">
+                                        <div class="price-wrap-left">
+                                            <div class="single-price">
+                                                <input type="number" class="form-control" id="minPrice" name="min_price"
+                                                    placeholder="$ Min" min="1" value="{{ request('min_price') }}" />
+                                            </div>
+                                            <div class="single-price">
+                                                <input type="number" class="form-control" id="maxPrice" name="max_price"
+                                                    placeholder="$ Max" value="{{ request('max_price') }}" />
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="price-submit"><i class="fas fa-play"></i></button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="single-widget colors-widget">
+                                <h3 class="widget-title">Colors</h3>
+                                <div class="colors-list">
+                                    @foreach($colors as $color)
+                                    <div class="single-colors">
+                                        <div class="colors-left">
+                                            <input style="background: {{ $color->color_code }}" class="form-check-input checkColor"
+                                                type="checkbox" id="#FF0000" value="{{ $color->id }}">
+                                            <label class="form-check-label" for="#FF0000">{{ $color->color }}</label>
+                                        </div>
+                                        <span class="colors-count">{{ $color->count ?? ""}}</span>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+
+                            <div class="single-widget size-widget">
+                                <h3 class="widget-title">Size</h3>
+                                <div class="size-list">
+                                    @foreach( $sizes as $size)
+                                    <div class="single-size">
+                                        <input class="form-check-input checkSize" type="checkbox" id="1" value="{{ $size->id }}">
+                                        <label class="form-check-label" for="1">{{ $size->size }}</label>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                            <div class="single-widget brand-widget">
+                                <h3 class="widget-title">Brand</h3>
+                                <div class="brand-list">
+                                    @foreach($brands as $brand)
+                                    <div class="single-brand">
+                                        <div class="brand-left">
+                                            <input class="form-check-input CheckBrand" type="checkbox" value="{{$brand->id}}"
+                                                @if(request()->has('brands') && in_array($brand->id, explode(',', request('brands')))) checked @endif>
+                                            <label class="form-check-label" for="Renuar">{{$brand->en_brand_name ?? ""}}</label>
+                                        </div>
+                                        <span class="brand-count">{{ $brand->prd_count }}</span>
+                                    </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <!-- Right Sidebar -->
             <div class="col-xl-9 col-lg-8">
                 <div class="product-section-top">
                     <div class="row align-items-center">

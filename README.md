@@ -193,3 +193,9 @@ resources/views/
             │           └── sidebar.blade.php
             └── Welcome.blade.php # first, this page will be called (goto this page, then you'll find app.blade.php is called there)
 ```
+
+
+
+
+
+tutorial 27 -> 15min 27 sec

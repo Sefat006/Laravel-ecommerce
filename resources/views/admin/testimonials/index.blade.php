@@ -12,7 +12,7 @@
             <div class="breadcrumb__content">
                 <div class="breadcrumb__content__left">
                     <div class="breadcrumb__title">
-                        <h2>Sliders List</h2>
+                        <h2>Testimonials List</h2>
                     </div>
                 </div>
                 <div class="breadcrumb__content__right">
@@ -20,7 +20,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a
                                     href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Sliders List</li>
+                            <li class="breadcrumb-item active" aria-current="page">Testimonials List</li>
                         </ul>
                     </nav>
                 </div>
@@ -32,8 +32,8 @@
             <div class="customers__area bg-style mb-30">
                 <div class="item-title">
                     <div class="col-xs-6">
-                        <a href="{{route('admin.slider.create')}}"
-                            class="btn btn-md btn-info">Add Slider</a>
+                        <a href="{{route('admin.testimonial.create')}}"
+                            class="btn btn-md btn-info">Add Testimonial</a>
                     </div>
                 </div>
                 <div class="customers__table">
@@ -63,40 +63,32 @@
                                     <th class="sorting_asc" tabindex="0" aria-controls="ContactUsTable"
                                         rowspan="1" colspan="1" aria-sort="ascending"
                                         aria-label="Name: activate to sort column descending"
-                                        style="width: 279px;">Title</th>
+                                        style="width: 279px;">Name</th>
                                     <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
                                         rowspan="1" colspan="1"
                                         aria-label="Email: activate to sort column ascending"
-                                        style="width: 224px;">SubTitle</th>
+                                        style="width: 224px;">Profession</th>
                                     <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
                                         rowspan="1" colspan="1"
                                         aria-label="Contact Number: activate to sort column ascending"
-                                        style="width: 185px;">Description</th>
+                                        style="width: 185px;">Reviews</th>
                                     <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
                                         rowspan="1" colspan="1"
                                         aria-label="Message: activate to sort column ascending"
                                         style="width: 205px;">Image</th>
-                                    <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Message: activate to sort column ascending"
-                                        style="width: 205px;">Link</th>
-                                    <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Message: activate to sort column ascending"
-                                        style="width: 205px;">Status</th>
                                     <th class="sorting_disabled" rowspan="1" colspan="1"
                                         aria-label="Action" style="width: 103px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($sliders as $data)
+                                @foreach($testimonials as $data)
                                 <tr role="row" class="odd">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td class="sorting_1">{{ $data->title }}</td>
-                                    <td>{{ $data->subtitle }}</td>
-                                    <td>{{ $data->description }}</td>
+                                    <td class="sorting_1">{{ $data->name }}</td>
+                                    <td>{{ $data->profession }}</td>
+                                    <td>{{ $data->review }}</td>
                                     <td>
-                                        <img width="80" src="{{ asset('front/assets/images/slider/' . $data->image) }}" alt="Slider Image">
+                                        <img width="80" src="{{ asset('front/assets/images/' . $data->image) }}" alt="testimonials Image">
                                     </td>
                                     <td>{{ $data->link }}</td>
                                     <td>
@@ -108,11 +100,11 @@
                                     </td>
                                     <td>
                                         <div class="action_buttons">
-                                            <a href="{{ route('admin.sliders.edit', $data->id ) }}" class="btn-action" data-bs-target="#viewModal1" title="View">
+                                            <a href="{{ route('admin.testimonial.edit', $data->id ) }}" class="btn-action" data-bs-target="#viewModal1" title="View">
                                                 <i class="fas fa-pencil"></i>
                                             </a>
                                             <a href="#" class="btn-action">
-                                                <form action="{{ route('admin.sliders.destroy', $data->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure to delete?');">
+                                                <form action="{{ route('admin.testimonial.destroy', $data->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure to delete?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn-action" style="border: none; background: transparent;">

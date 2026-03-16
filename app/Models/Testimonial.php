@@ -9,6 +9,7 @@ class Testimonial extends Model
     // Fillable fields for mass assignment
     protected $fillable = [
         'name',
+        'profession',
         'image',
         'review',
         'status',

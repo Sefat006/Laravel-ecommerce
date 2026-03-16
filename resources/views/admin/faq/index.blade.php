@@ -12,7 +12,7 @@
             <div class="breadcrumb__content">
                 <div class="breadcrumb__content__left">
                     <div class="breadcrumb__title">
-                        <h2>Sliders List</h2>
+                        <h2>FAQ</h2>
                     </div>
                 </div>
                 <div class="breadcrumb__content__right">
@@ -20,7 +20,7 @@
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a
                                     href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Sliders List</li>
+                            <li class="breadcrumb-item active" aria-current="page">FAQ</li>
                         </ul>
                     </nav>
                 </div>
@@ -32,8 +32,8 @@
             <div class="customers__area bg-style mb-30">
                 <div class="item-title">
                     <div class="col-xs-6">
-                        <a href="{{route('admin.slider.create')}}"
-                            class="btn btn-md btn-info">Add Slider</a>
+                        <a href="{{route('admin.faq.create')}}"
+                            class="btn btn-md btn-info">Add FAQ</a>
                     </div>
                 </div>
                 <div class="customers__table">
@@ -63,56 +63,28 @@
                                     <th class="sorting_asc" tabindex="0" aria-controls="ContactUsTable"
                                         rowspan="1" colspan="1" aria-sort="ascending"
                                         aria-label="Name: activate to sort column descending"
-                                        style="width: 279px;">Title</th>
+                                        style="width: 279px;">Question</th>
                                     <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
                                         rowspan="1" colspan="1"
                                         aria-label="Email: activate to sort column ascending"
-                                        style="width: 224px;">SubTitle</th>
-                                    <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Contact Number: activate to sort column ascending"
-                                        style="width: 185px;">Description</th>
-                                    <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Message: activate to sort column ascending"
-                                        style="width: 205px;">Image</th>
-                                    <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Message: activate to sort column ascending"
-                                        style="width: 205px;">Link</th>
-                                    <th class="sorting" tabindex="0" aria-controls="ContactUsTable"
-                                        rowspan="1" colspan="1"
-                                        aria-label="Message: activate to sort column ascending"
-                                        style="width: 205px;">Status</th>
+                                        style="width: 224px;">Answer</th>
                                     <th class="sorting_disabled" rowspan="1" colspan="1"
                                         aria-label="Action" style="width: 103px;">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($sliders as $data)
+                                @foreach($faq as $data)
                                 <tr role="row" class="odd">
                                     <td>{{ $loop->iteration }}</td>
-                                    <td class="sorting_1">{{ $data->title }}</td>
-                                    <td>{{ $data->subtitle }}</td>
-                                    <td>{{ $data->description }}</td>
-                                    <td>
-                                        <img width="80" src="{{ asset('front/assets/images/slider/' . $data->image) }}" alt="Slider Image">
-                                    </td>
-                                    <td>{{ $data->link }}</td>
-                                    <td>
-                                        @if($data->status == 1)
-                                        <span class="badge bg-success">Active</span>
-                                        @else
-                                        <span class="badge bg-secondary">Inactive</span>
-                                        @endif
-                                    </td>
+                                    <td class="sorting_1">{{ $data->en_question }}</td>
+                                    <td>{{ $data->en_answer }}</td>
                                     <td>
                                         <div class="action_buttons">
-                                            <a href="{{ route('admin.sliders.edit', $data->id ) }}" class="btn-action" data-bs-target="#viewModal1" title="View">
+                                            <a href="{{ route('admin.faq.edit', $data->id ) }}" class="btn-action" data-bs-target="#viewModal1" title="View">
                                                 <i class="fas fa-pencil"></i>
                                             </a>
                                             <a href="#" class="btn-action">
-                                                <form action="{{ route('admin.sliders.destroy', $data->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure to delete?');">
+                                                <form action="{{ route('admin.faq.destroy', $data->id) }}" method="POST" style="display: inline-block;" onsubmit="return confirm('Are you sure to delete?');">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit" class="btn-action" style="border: none; background: transparent;">

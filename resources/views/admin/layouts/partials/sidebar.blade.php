@@ -16,7 +16,7 @@
         </div>
         <ul id="sidebar-menu" class="sidebar__menu">
             <li class="mm-active">
-                <a href="dashboard.html">
+                <a href="{{ route('admin.dashboard') }}">
                     <img src="assets/images/icons/sidebar/dashboard.svg" alt="icon">
                     <span>Dashboard</span>
                 </a>
@@ -134,13 +134,13 @@
                 </a>
                 <ul>
                     <li class="">
-                        <a href="contacts.html">
+                        <a href="{{ route('admin.contacts.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>Contact Us</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="subscriber.html">
+                        <a href="{{ route('admin.subscribers.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>Subscribers</span>
                         </a>
@@ -180,7 +180,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="testimonial.html">
+                        <a href="{{ route('admin.testimonials.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>Testimonial</span>
                         </a>
@@ -194,9 +194,15 @@
                 </ul>
             </li>
             <li class="">
-                <a href="sliders.html">
+                <a href="{{ route('admin.sliders.index') }}">
                     <i class="fas fa-list-ol"></i>
                     <span>Sliders</span>
+                </a>
+            </li>
+            <li class="">
+                <a href="{{ route('admin.faq.index') }}">
+                    <i class="fas fa-list-ol"></i>
+                    <span>faq</span>
                 </a>
             </li>
             <li class="">
@@ -218,7 +224,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="seo-homepage.html">
+                        <a href="">
                             <i class="fa fa-circle"></i>
                             <span>Contact</span>
                         </a>

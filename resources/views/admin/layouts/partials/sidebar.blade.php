@@ -54,7 +54,7 @@
                 </a>
                 <ul>
                     <li class="">
-                        <a href="category.html">
+                        <a href="{{ route('admin.categories.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>Category</span>
                         </a>

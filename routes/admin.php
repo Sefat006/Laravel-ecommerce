@@ -8,7 +8,7 @@ use App\Http\Controllers\Admin\FaqController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\TestimonialController;
-
+use App\Http\Controllers\Admin\CategoryController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     //login pages
@@ -48,7 +48,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('faq/{id}', [FaqController::class, 'update'])->name('faq.update');
         Route::delete('faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
-
+// Testimonial Routes
         Route::get('testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
         Route::get('testimonials/create', [TestimonialController::class, 'create'])->name('testimonial.create');
         Route::post('testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
@@ -56,5 +56,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('testimonials/{id}/edit', [TestimonialController::class, 'edit'])->name('testimonial.edit');
         Route::put('testimonials/{id}', [TestimonialController::class, 'update'])->name('testimonial.update');
         Route::delete('testimonials/{id}', [TestimonialController::class, 'destroy'])->name('testimonial.destroy');
+
+
+// Categories Routes
+        Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('categories/create', [CategoryController::class, 'create'])->name('category.create');
+        Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('categories/{id}', [CategoryController::class, 'show'])->name('categories.show');
+        Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+        Route::put('categories/{id}', [CategoryController::class, 'update'])->name('category.update');
+        Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     });
 });

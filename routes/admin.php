@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\FaqController;
@@ -48,7 +49,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::put('faq/{id}', [FaqController::class, 'update'])->name('faq.update');
         Route::delete('faq/{id}', [FaqController::class, 'destroy'])->name('faq.destroy');
 
-// Testimonial Routes
+        // Testimonial Routes
         Route::get('testimonials', [TestimonialController::class, 'index'])->name('testimonials.index');
         Route::get('testimonials/create', [TestimonialController::class, 'create'])->name('testimonial.create');
         Route::post('testimonials', [TestimonialController::class, 'store'])->name('testimonials.store');
@@ -58,7 +59,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::delete('testimonials/{id}', [TestimonialController::class, 'destroy'])->name('testimonial.destroy');
 
 
-// Categories Routes
+        // Categories Routes
         Route::get('categories', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('categories/create', [CategoryController::class, 'create'])->name('category.create');
         Route::post('categories', [CategoryController::class, 'store'])->name('categories.store');
@@ -66,5 +67,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('categories/{id}/edit', [CategoryController::class, 'edit'])->name('category.edit');
         Route::put('categories/{id}', [CategoryController::class, 'update'])->name('category.update');
         Route::delete('categories/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
+
+
+        // Brands Routes
+        Route::get('brands', [BrandController::class, 'index'])->name('brands.index');
+        Route::get('brands/create', [BrandController::class, 'create'])->name('brand.create');
+        Route::post('brands', [BrandController::class, 'store'])->name('brands.store');
+        Route::get('brands/{id}', [BrandController::class, 'show'])->name('brands.show');
+        Route::get('brands/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
+        Route::put('brands/{id}', [BrandController::class, 'update'])->name('brand.update');
+        Route::delete('brands/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
     });
 });

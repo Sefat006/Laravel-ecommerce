@@ -15,12 +15,13 @@ class Category extends Model
         'icon',
         'desc',
         'status',
-        'en_short_info', 
+        'en_short_info',
+        'meta_title',
+        'meta_description',
+        'keywords',
+        // 'prd_count',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     */
     protected $casts = [
         'status' => 'integer',
         'created_at' => 'datetime',

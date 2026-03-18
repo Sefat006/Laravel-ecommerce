@@ -60,7 +60,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="brand.html">
+                        <a href="{{ route('admin.brands.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>Brand</span>
                         </a>

@@ -82,7 +82,7 @@
                 <div class="header-middle-wrap">
                     <div class="brand-area">
                         <a class="brand-logo" href="/"><img class="brand-image"
-                                src="{{ asset('front/assets/images/logo.png')}}" alt="Fashionwave" /></a>
+                                src="{{ asset('front/assets/images/settings/1773894248_logo.png')}}" alt="Fashionwave" /></a>
                     </div>
                     <div class="search-area">
                         <form action="{{ route('products.index')}}" method="Get">

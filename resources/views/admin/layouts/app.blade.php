@@ -8,10 +8,10 @@
     <title>Dashboard | Fashionwave</title>
 
     <!-- Favicon included -->
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.png') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/settings/favicon.png') }}" type="image/x-icon">
 
     <!-- Apple touch icon included -->
-    <link rel="apple-touch-icon" href="{{ asset('admin/assets/images/favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('admin/assets/images/settings/favicon.png') }}">
 
     <!-- All CSS files included here -->
     <link rel="stylesheet" href="{{ asset('admin/assets/css/all.min.css') }}">

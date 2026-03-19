@@ -1,7 +1,3 @@
-    
-    
-    
-    
     <!-- Sidebar area start -->
     <div class="sidebar__area">
         <div class="sidebar__close">
@@ -168,15 +164,15 @@
                 </a>
                 <ul>
                     <li class="">
-                        <a href="settings.html">
+                        <a href="{{ route('admin.setting.edit', 1) }}">
                             <i class="fa fa-circle"></i>
                             <span>General Settings</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="home-settings.html">
+                        <a href="{{ route('admin.pages.index') }}">
                             <i class="fa fa-circle"></i>
-                            <span>Home Page</span>
+                            <span>Pages</span>
                         </a>
                     </li>
                     <li class="">
@@ -285,7 +281,7 @@
                     </li>
                 </ul>
             </li>
-            
+
             <li class="">
                 <a href="gateways.html">
                     <i class="fa fa-money-bill"></i>

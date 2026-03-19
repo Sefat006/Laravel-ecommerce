@@ -6,7 +6,7 @@
                     <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4">
                         <div class="single-widget about-widget">
                             <a href="http://127.0.0.1:8000" class="footer-brand-logo mb-25"><img
-                                    src="{{ asset('front/assets/images/'.get_Settings()->address) }}" alt="footer-logo" /></a>
+                                    src="{{ asset('front/assets/images/settings/'.get_Settings()->logo) }}" alt="footer-logo" /></a>
                             <p class="address-text">
                                 {{ get_Settings()->address ?? ""}}
                             </p>

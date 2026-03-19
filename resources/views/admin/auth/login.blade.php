@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login | Fashionwave</title>
 
-    <link rel="shortcut icon" href="{{ asset('admin/assets/images/favicon.png')}}" type="image/x-icon">
-    <link rel="apple-touch-icon" href="{{ asset('admin/assets/images/favicon.png') }}">
+    <link rel="shortcut icon" href="{{ asset('admin/assets/images/settings/favicon.png')}}" type="image/x-icon">
+    <link rel="apple-touch-icon" href="{{ asset('admin/assets/images/settings/favicon.png') }}">
 
     <link rel="stylesheet" href="{{ asset('admin/assets/css/all.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/assets/css/bootstrap.min.css') }}">

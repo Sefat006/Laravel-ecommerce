@@ -10,6 +10,8 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\PagesController;
+use App\Http\Controllers\Admin\SettingController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     //login pages
@@ -77,5 +79,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('brands/{id}/edit', [BrandController::class, 'edit'])->name('brand.edit');
         Route::put('brands/{id}', [BrandController::class, 'update'])->name('brand.update');
         Route::delete('brands/{id}', [BrandController::class, 'destroy'])->name('brand.destroy');
+
+
+
+        // Brands Routes
+        Route::get('pages', [PagesController::class, 'index'])->name('pages.index');
+        Route::get('pages/{id}', [PagesController::class, 'show'])->name('pages.show');
+        Route::get('pages/{id}/edit', [PagesController::class, 'edit'])->name('page.edit');
+        Route::put('pages/{id}', [PagesController::class, 'update'])->name('page.update');
+        
+        
+        Route::get('setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
+        Route::put('setting/{id}', [SettingController::class, 'update'])->name('setting.update');
     });
 });

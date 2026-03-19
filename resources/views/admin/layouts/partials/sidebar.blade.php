@@ -24,13 +24,13 @@
                 </a>
                 <ul>
                     <li class="">
-                        <a href="assets/admins">
+                        <a href="{{route('admin.users.index')}}">
                             <i class="fa fa-circle"></i>
                             <span>Admin List</span>
                         </a>
                     </li>
                     <li class="">
-                        <a href="assets/create-admin">
+                        <a href="{{route('admin.user.create')}}">
                             <i class="fa fa-circle"></i>
                             <span>Add Admin</span>
                         </a>
@@ -118,7 +118,7 @@
                 </a>
             </li>
             <li class="">
-                <a href="coupon.html">
+                <a href="{{ route('admin.coupons.index')}}">
                     <i class="fas fa-code"></i>
                     <span>Coupon Code</span>
                 </a>
@@ -283,7 +283,7 @@
             </li>
 
             <li class="">
-                <a href="gateways.html">
+                <a href="{{route('admin.gateways.edit')}}">
                     <i class="fa fa-money-bill"></i>
                     <span>Payment Gateway</span>
                 </a>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;
+use App\Models\Gateway;
 use App\Models\State;
 use Illuminate\Http\Request;
 
@@ -18,7 +19,8 @@ class CheckoutController extends Controller
         }
 
         $countries = Country::all();
-        return view('front.checkout.index', compact('countries'));
+        $gateway = Gateway::all()->keyBy('name');
+        return view('front.checkout.index', compact('countries', 'gateway'));
     }    
 
     public function getStates($country_id)

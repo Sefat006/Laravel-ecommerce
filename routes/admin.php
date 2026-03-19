@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\BrandController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
+use App\Http\Controllers\Admin\GatewayController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingController;
 
@@ -87,9 +90,35 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('pages/{id}', [PagesController::class, 'show'])->name('pages.show');
         Route::get('pages/{id}/edit', [PagesController::class, 'edit'])->name('page.edit');
         Route::put('pages/{id}', [PagesController::class, 'update'])->name('page.update');
-        
-        
+
+
         Route::get('setting/{id}/edit', [SettingController::class, 'edit'])->name('setting.edit');
         Route::put('setting/{id}', [SettingController::class, 'update'])->name('setting.update');
+
+
+        // Coupon Route
+        Route::get('coupons', [CouponController::class, 'index'])->name('coupons.index');
+        Route::get('coupons/create', [CouponController::class, 'create'])->name('coupon.create');
+        Route::post('coupons', [CouponController::class, 'store'])->name('coupons.store');
+        Route::get('coupons/{id}', [CouponController::class, 'show'])->name('coupons.show');
+        Route::get('coupons/{id}/edit', [CouponController::class, 'edit'])->name('coupon.edit');
+        Route::put('coupons/{id}', [CouponController::class, 'update'])->name('coupon.update');
+        Route::delete('coupons/{id}', [CouponController::class, 'destroy'])->name('coupon.destroy');
+
+
+
+        // Users Route
+        Route::get('users', [AdminController::class, 'index'])->name('users.index');
+        Route::get('users/create', [AdminController::class, 'create'])->name('user.create');
+        Route::post('users', [AdminController::class, 'store'])->name('users.store');
+        Route::get('users/{id}', [AdminController::class, 'show'])->name('users.show');
+        Route::get('users/{id}/edit', [AdminController::class, 'edit'])->name('user.edit');
+        Route::put('users/{id}', [AdminController::class, 'update'])->name('user.update');
+        Route::delete('users/{id}', [AdminController::class, 'destroy'])->name('user.destroy');
+
+
+        // gateways route
+        Route::get('gateways/edit', [GatewayController::class, 'edit'])->name('gateways.edit');
+        Route::put('gateways', [GatewayController::class, 'update'])->name('gateways.update');
     });
 });

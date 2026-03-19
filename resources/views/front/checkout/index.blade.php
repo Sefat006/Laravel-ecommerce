@@ -82,7 +82,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
                                         <label for="shipping_state" class="form-label">State <span class="text-danger">*</span></label>
                                         <select class="form-select" id="shipping_state" name="shipping_state">
                                             <option selected disabled>Select State</option>
-                                            
+
                                         </select>
                                     </div>
                                 </div>
@@ -96,7 +96,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
 
                             </div>
                             <div class="form-group form-check terms-agree">
-                                <input type="checkbox" class="form-check-input" id="copy_address" name="copy_address"/>
+                                <input type="checkbox" class="form-check-input" id="copy_address" name="copy_address" />
                                 <label class="form-check-label" for="copy_address">The Billing Address different from shipping address? </label>
                             </div>
                             <!-- ---------- billing address -------------- -->
@@ -108,25 +108,25 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="billing_name" class="form-label">Full Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="billing_name" name="billing_name" placeholder="Your Name Here" value=""  />
+                                        <input type="text" class="form-control" id="billing_name" name="billing_name" placeholder="Your Name Here" value="" />
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="billing_email" class="form-label">Email Address <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="billing_email" name="billing_email" placeholder="Email Address" value=""  />
+                                        <input type="email" class="form-control" id="billing_email" name="billing_email" placeholder="Email Address" value="" />
                                     </div>
                                 </div>
                                 <div class="col-lg-12">
                                     <div class="form-group">
                                         <label for="billing_street_address" class="form-label">Street Address <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="billing_street_address" name="billing_street_address" placeholder="Street Address" value=""  />
+                                        <input type="text" class="form-control" id="billing_street_address" name="billing_street_address" placeholder="Street Address" value="" />
                                     </div>
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="billing_country" class="form-label">Country <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="billing_country" name="billing_country" >
+                                        <select class="form-select" id="billing_country" name="billing_country">
                                             <option selected disabled>Select Country</option>
                                             @foreach($countries as $country)
                                             <option value="{{ $country->id }}">{{ $country->name }}</option>
@@ -137,16 +137,16 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
                                 <div class="col-lg-6">
                                     <div class="form-group">
                                         <label for="billing_state" class="form-label">State <span class="text-danger">*</span></label>
-                                        <select class="form-select" id="billing_state" name="billing_state" >
+                                        <select class="form-select" id="billing_state" name="billing_state">
                                             <option selected disabled>Select State</option>
-                                            
+
                                         </select>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 mt-2">
                                     <div class="form-group">
                                         <label for="billing_zipcode" class="form-label">Zip/Postal Code <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="billing_zipcode" name="billing_zipcode" placeholder="Zip/Postal Code" value=""  />
+                                        <input type="text" class="form-control" id="billing_zipcode" name="billing_zipcode" placeholder="Zip/Postal Code" value="" />
                                     </div>
                                 </div>
                             </div>
@@ -155,162 +155,145 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
 
                             <div class="payment-method">
                                 <div class="row">
+
                                     <div class="col-lg-12">
                                         <h2 class="checkout-title">Payment Method</h2>
                                     </div>
+
                                     <div class="col-lg-12">
+
+                                        {{-- PAYPAL --}}
+                                        @if(isset($gateway['paypal']) && $gateway['paypal']->status)
                                         <div class="form-group">
                                             <div class="form-check card-check">
-                                                <input class="form-check-input" type="radio" name="payment"
-                                                    id="paypal" value="paypal" />
+                                                <input class="form-check-input" type="radio" name="payment" id="paypal" value="paypal" />
                                                 <label class="form-check-label" for="paypal">PayPal</label>
                                                 <div class="input-icon">
-                                                    <img src="{{ asset('front/assets/images/payment-gateway/paypal.png') }}"
-                                                        alt="paypal" />
+                                                    <img src="{{ asset('front/assets/images/payment-gateway/paypal.png') }}">
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
+
+
+                                        {{-- CREDIT CARD (STRIPE) --}}
+                                        @if(isset($gateway['creditcard']) && $gateway['creditcard']->status)
                                         <div class="form-group">
                                             <div class="form-check card-check">
-                                                <input class="form-check-input" type="radio" name="payment"
-                                                    id="creditcard" value="creditcard" />
-                                                <label class="form-check-label" for="creditcard">
-                                                    Stripe</label>
+                                                <input class="form-check-input" type="radio" name="payment" id="creditcard" value="creditcard" />
+                                                <label class="form-check-label" for="creditcard">Stripe</label>
                                                 <div class="input-icon">
-                                                    <img src="{{ asset('front/assets/images/payment-gateway/payment-method.png') }}"
-                                                        alt="payment-method" />
+                                                    <img src="{{ asset('front/assets/images/payment-gateway/payment-method.png') }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <input type="hidden" name="payment_platform" id="payment_platform">
+
                                         <div class="card-infor-box mb-3 d-none" id="stripe-area">
                                             <div class="row">
                                                 <div class="col-lg-12">
-                                                    <label class="mt-3" for="card-element">
-                                                        Card details:
-                                                    </label>
-
+                                                    <label class="mt-3">Card details:</label>
                                                     <div id="cardElement"></div>
-
-                                                    <small class="form-text text-muted" id="cardErrors"
-                                                        role="alert"></small>
-
+                                                    <small id="cardErrors" class="form-text text-muted"></small>
                                                     <input type="hidden" name="payment_method" id="paymentMethod">
                                                 </div>
                                             </div>
                                         </div>
+                                        @endif
+
+
+                                        {{-- RAZORPAY --}}
+                                        @if(isset($gateway['razorpay']) && $gateway['razorpay']->status)
                                         <div class="form-group">
                                             <div class="form-check card-check">
-                                                <input class="form-check-input" type="radio" name="payment"
-                                                    id="razorpay" value="razorpay" />
+                                                <input class="form-check-input" type="radio" name="payment" id="razorpay" value="razorpay" />
                                                 <label class="form-check-label" for="razorpay">Razorpay</label>
                                                 <div class="input-icon">
-                                                    <img src="{{ asset('front/assets/images/payment-gateway/razorpay.png') }}"
-                                                        alt="razorpay" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <input type="hidden" name="pay_to_razorpay" id="pay-to-razorpay"
-                                            value="44634">
-                                        <input type="hidden" name="razorpay_key" id="razorpay-key" value="">
-                                        <input type="hidden" name="razorpay_payment_id" id="razorpay-payment-id">
-                                        <div class="form-group">
-                                            <div class="form-check card-check">
-                                                <input class="form-check-input" type="radio" name="payment"
-                                                    id="bank" value="bank" />
-                                                <label class="form-check-label" for="bank">
-                                                    Bank</label>
-                                                <div class="input-icon">
-                                                    <img src="{{ asset('front/assets/images/payment-gateway/bank.png') }}"
-                                                        alt="payment-method" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-infor-box mb-3 d-none" id="bank-area">
-                                            <div class="form-group">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                        <label class="mt-3" for="bank-trans-num">
-                                                            Transaction Number:
-                                                        </label>
-                                                        <input type="text" name="bank_transaction_number"
-                                                            id="bank-trans-num" class="form-control"
-                                                            placeholder="Enter Your Transaction Number" />
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <div class="mt-3">
-                                                            <b>Bank Account Details:</b> <br>
-                                                            Bank Name:
-                                                            bank
-                                                            <br>
-                                                            Account Number:
-                                                            <br>
-                                                            Account Holder:
-                                                            <br>
-                                                            Branch:
-                                                            us <br>
-                                                            Swift Code:
-                                                            <br>
-                                                            Routing Number:
-                                                            asdf <br>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-check card-check">
-                                                <input class="form-check-input" type="radio" name="payment"
-                                                    id="sslcommerz" value="sslcommerz" />
-                                                <label class="form-check-label" for="sslcommerz">Sslcommerz</label>
-                                                <div class="input-icon">
-                                                    <img src="{{ asset('front/assets/images/payment-gateway/sslcommerz.png') }}"
-                                                        alt="sslcommerz" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="form-check card-check">
-                                                <input class="form-check-input" type="radio" name="payment" id="cod"
-                                                    value="cod" />
-                                                <label class="form-check-label" for="cod">Cash On Delivey</label>
-                                                <div class="input-icon">
-                                                    <img src="{{ asset('front/assets/images/payment-gateway/cod.jpg') }}"
-                                                        alt="Cash On Delivey" />
+                                                    <img src="{{ asset('front/assets/images/payment-gateway/razorpay.png') }}">
                                                 </div>
                                             </div>
                                         </div>
 
+                                        <input type="hidden" name="pay_to_razorpay" id="pay-to-razorpay">
+                                        <input type="hidden" name="razorpay_key" id="razorpay-key">
+                                        <input type="hidden" name="razorpay_payment_id" id="razorpay-payment-id">
+                                        @endif
+
+
+                                        {{-- BANK --}}
+                                        @if(isset($gateway['bank']) && $gateway['bank']->status)
+                                        <div class="form-group">
+                                            <div class="form-check card-check">
+                                                <input class="form-check-input" type="radio" name="payment" id="bank" value="bank" />
+                                                <label class="form-check-label" for="bank">Bank</label>
+                                                <div class="input-icon">
+                                                    <img src="{{ asset('front/assets/images/payment-gateway/bank.png') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card-infor-box mb-3 d-none" id="bank-area">
+                                            <div class="form-group">
+                                                <label class="mt-3">Transaction Number:</label>
+                                                <input type="text" name="bank_transaction_number" class="form-control" placeholder="Enter Transaction Number">
+
+                                                <div class="mt-3">
+                                                    <b>Bank Account Details:</b><br>
+
+                                                    Bank Name: {{ $gateway['bank']->credentials['bank_name'] ?? '' }} <br>
+                                                    Account Number: {{ $gateway['bank']->credentials['account_number'] ?? '' }} <br>
+                                                    Account Holder: {{ $gateway['bank']->credentials['account_name'] ?? '' }} <br>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+
+
+                                        {{-- SSLCOMMERZ --}}
+                                        @if(isset($gateway['sslcommerz']) && $gateway['sslcommerz']->status)
+                                        <div class="form-group">
+                                            <div class="form-check card-check">
+                                                <input class="form-check-input" type="radio" name="payment" id="sslcommerz" value="sslcommerz" />
+                                                <label class="form-check-label" for="sslcommerz">Sslcommerz</label>
+                                                <div class="input-icon">
+                                                    <img src="{{ asset('front/assets/images/payment-gateway/sslcommerz.png') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+
+
+                                        {{-- COD --}}
+                                        @if(isset($gateway['cod']) && $gateway['cod']->status)
+                                        <div class="form-group">
+                                            <div class="form-check card-check">
+                                                <input class="form-check-input" type="radio" name="payment" id="cod" value="cod" />
+                                                <label class="form-check-label" for="cod">Cash On Delivery</label>
+                                                <div class="input-icon">
+                                                    <img src="{{ asset('front/assets/images/payment-gateway/cod.jpg') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        @endif
+
+
+                                        {{-- TERMS --}}
                                         <div class="form-group form-check terms-agree">
                                             <input type="checkbox" class="form-check-input" id="agree" required />
-                                            <label class="form-check-label" for="agree">By clicking the button you
-                                                agree to our
-                                                <a href="terms.html">Terms &amp; Conditions</a></label>
+                                            <label class="form-check-label" for="agree">
+                                                By clicking the button you agree to our
+                                                <a href="#">Terms & Conditions</a>
+                                            </label>
                                         </div>
+
+                                        {{-- LOGIN / SUBMIT --}}
                                         @guest
-                                        <a class="checkout-btn text-center pt-3" href="{{route('login')}}">Please Login First</a>
+                                        <a class="checkout-btn text-center pt-3" href="{{ route('login') }}">
+                                            Please Login First
+                                        </a>
                                         @else
                                         <button type="submit" class="checkout-btn">Place Order</button>
                                         @endguest
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal fade common-modal" id="show-razor-thanks" data-bs-backdrop="static"
-                                data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog modal-dialog-centered">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">
-                                                Razorpay Confirmation</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            Your payment is authorized. For capturing your order click
-                                            <b>Place Order</b>
-                                            <div class="modal-btn-wrap text-end">
-                                                <button type="submit" class="primary-btn">Place Order</button>
-                                            </div>
-                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -384,10 +367,10 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
 @endsection
 @push('scripts')
 <script>
-    $(document).ready(function () {
+    $(document).ready(function() {
 
         // ── Billing address toggle ──────────────────────────────────────────
-        $('#copy_address').on('change', function () {
+        $('#copy_address').on('change', function() {
             if ($(this).is(':checked')) {
                 $('#billingform').removeClass('d-none');
             } else {
@@ -398,7 +381,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
         });
 
         // ── Before form submit: copy shipping → billing when checkbox is OFF ─
-        $('form[action="{{ route("order.store") }}"]').on('submit', function () {
+        $('form[action="{{ route("order.store") }}"]').on('submit', function() {
             if (!$('#copy_address').is(':checked')) {
                 $('#billing_name').val($('#shipping_name').val());
                 $('#billing_email').val($('#shipping_email').val());
@@ -411,15 +394,15 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
 
         // ── State dropdowns ─────────────────────────────────────────────────
         // Shipping country → loads shipping states only
-        $('#shipping_country').on('change', function () {
+        $('#shipping_country').on('change', function() {
             let country_id = $(this).val();
             if (country_id) {
                 $.ajax({
                     url: `/get-states/${country_id}`,
                     type: 'GET',
-                    success: function (response) {
+                    success: function(response) {
                         $('#shipping_state').empty().append('<option value="">Select State</option>');
-                        $.each(response.states, function (key, state) {
+                        $.each(response.states, function(key, state) {
                             $('#shipping_state').append('<option value="' + state.id + '">' + state.name + '</option>');
                         });
                     }
@@ -429,7 +412,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
                 $.ajax({
                     url: `/get-tax/${country_id}`,
                     type: 'GET',
-                    success: function (response) {
+                    success: function(response) {
                         //let taxAmount = (parseFloat(response.tax_rate) / 100) * parseFloat($('#subtotal').data('value'));
                         let taxAmount = (parseFloat(response.tax_rate));
                         $('#vatAmount').text('$ ' + taxAmount.toFixed(2)).data('value', taxAmount);
@@ -440,15 +423,15 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
         });
 
         // Billing country → loads billing states only
-        $('#billing_country').on('change', function () {
+        $('#billing_country').on('change', function() {
             let country_id = $(this).val();
             if (country_id) {
                 $.ajax({
                     url: `/get-states/${country_id}`,
                     type: 'GET',
-                    success: function (response) {
+                    success: function(response) {
                         $('#billing_state').empty().append('<option value="">Select State</option>');
-                        $.each(response.states, function (key, state) {
+                        $.each(response.states, function(key, state) {
                             $('#billing_state').append('<option value="' + state.id + '">' + state.name + '</option>');
                         });
                     }
@@ -457,13 +440,13 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
         });
 
         // Shipping state → shipping charge
-        $('#shipping_state').on('change', function () {
+        $('#shipping_state').on('change', function() {
             let state_id = $(this).val();
             if (state_id) {
                 $.ajax({
                     url: `/get-shipping/${state_id}`,
                     type: 'GET',
-                    success: function (response) {
+                    success: function(response) {
                         let shippingCharge = parseFloat(response.shipping_charge);
                         $('#shippingAmount').text('$ ' + shippingCharge.toFixed(2)).data('value', shippingCharge);
                         updateGrandTotal();
@@ -475,7 +458,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
         // ── Grand total calculator ──────────────────────────────────────────
         function updateGrandTotal() {
             let subtotal = parseFloat($('#subtotal').data('value')) || 0;
-            let vat      = parseFloat($('#vatAmount').data('value')) || 0;
+            let vat = parseFloat($('#vatAmount').data('value')) || 0;
             let shipping = parseFloat($('#shippingAmount').data('value')) || 0;
             let discount = parseFloat($('#discountAmount').data('value')) || 0;
 
@@ -484,7 +467,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
         }
 
         // ── Coupon apply ────────────────────────────────────────────────────
-        $('#applyCouponForm').on('submit', function (e) {
+        $('#applyCouponForm').on('submit', function(e) {
             e.preventDefault();
             $.ajax({
                 url: '/coupon/apply',
@@ -493,7 +476,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
                     _token: $('input[name="_token"]').val(),
                     coupon_code: $('#coupon_code').val()
                 },
-                success: function (response) {
+                success: function(response) {
                     if (response.success) {
                         $('#couponMessage').text(response.message).css('color', 'green');
                         $('#discountAmount').text('- $ ' + response.discount.toFixed(2)).data('value', response.discount);
@@ -504,7 +487,7 @@ $subtotalInt = collect(session('cart', []))->sum(fn($item) => ($item['discounted
                         $('#couponMessage').text(response.message).css('color', 'red');
                     }
                 },
-                error: function () {
+                error: function() {
                     $('#couponMessage').text('Something went wrong!').css('color', 'red');
                 }
             });

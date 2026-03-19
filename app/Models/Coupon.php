@@ -17,7 +17,6 @@ class Coupon extends Model
         'code',
         'type',
         'discount_value',
-        'minimum_order_amount',
         'expiry_date',
         'status',
     ];

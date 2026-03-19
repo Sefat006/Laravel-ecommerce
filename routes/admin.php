@@ -11,11 +11,13 @@ use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\SubscribersController;
 use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\GatewayController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\StatesController;
 use App\Http\Controllers\Admin\UserController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -126,22 +128,34 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Customers Route
         Route::get('customers', [UserController::class, 'index'])->name('customers.index');
-        Route::get('customers/create', [UserController::class, 'create'])->name('customer.create');
-        Route::post('customers', [UserController::class, 'store'])->name('customers.store');
-        Route::get('customers/{id}', [UserController::class, 'show'])->name('customers.show');
-        Route::get('customers/{id}/edit', [UserController::class, 'edit'])->name('customer.edit');
-        Route::put('customers/{id}', [UserController::class, 'update'])->name('customer.update');
         Route::delete('customers/{id}', [UserController::class, 'destroy'])->name('customer.destroy');
 
 
         // orders Route
         Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
-        Route::get('orders/create', [OrderController::class, 'create'])->name('order.create');
-        Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
         Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-        Route::get('orders/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
-        Route::put('orders/{id}', [OrderController::class, 'update'])->name('order.update');
-        Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
 
+
+
+
+        // Countries Routes
+        Route::get('countries', [CountryController::class, 'index'])->name('countries.index');
+        Route::get('countries/create', [CountryController::class, 'create'])->name('country.create');
+        Route::post('countries', [CountryController::class, 'store'])->name('countries.store');
+        Route::get('countries/{id}', [CountryController::class, 'show'])->name('countries.show');
+        Route::get('countries/{id}/edit', [CountryController::class, 'edit'])->name('country.edit');
+        Route::put('countries/{id}', [CountryController::class, 'update'])->name('country.update');
+        Route::delete('countries/{id}', [CountryController::class, 'destroy'])->name('country.destroy');
+
+
+
+        // States Routes
+        Route::get('states', [StatesController::class, 'index'])->name('states.index');
+        Route::get('states/create', [StatesController::class, 'create'])->name('state.create');
+        Route::post('states', [StatesController::class, 'store'])->name('states.store');
+        Route::get('states/{id}', [StatesController::class, 'show'])->name('states.show');
+        Route::get('states/{id}/edit', [StatesController::class, 'edit'])->name('state.edit');
+        Route::put('states/{id}', [StatesController::class, 'update'])->name('state.update');
+        Route::delete('states/{id}', [StatesController::class, 'destroy'])->name('state.destroy');
     });
 });

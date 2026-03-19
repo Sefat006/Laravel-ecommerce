@@ -35,12 +35,12 @@
                             <span>Add Admin</span>
                         </a>
                     </li>
-                    <li class="">
+                    <!-- <li class="">
                         <a href="assets/roles">
                             <i class="fa fa-circle"></i>
                             <span>Roles</span>
                         </a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
             <li class="">
@@ -288,7 +288,7 @@
                     <span>Payment Gateway</span>
                 </a>
             </li>
-            <li class="">
+            <!-- <li class="">
                 <a class="has-arrow" href="#">
                     <i class="fas fa-address-book"></i>
                     <span>Company</span>
@@ -313,7 +313,30 @@
                         </a>
                     </li>
                 </ul>
+            </li> -->
+
+            <li class="">
+                <a class="has-arrow" href="#">
+                    <i class="fas fa-receipt"></i>
+                    <span>Vat/Tax & Shipping</span>
+                </a>
+                <ul>
+                    <li class="">
+                        <a href="{{ route('admin.countries.index') }}">
+                            <i class="fa fa-circle"></i>
+                            <span>Countries</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('admin.states.index') }}">
+                            <i class="fa fa-circle"></i>
+                            <span>States</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
+
+
         </ul>
     </div>
     <!-- Sidebar area end -->

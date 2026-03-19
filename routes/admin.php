@@ -13,8 +13,10 @@ use App\Http\Controllers\Admin\TestimonialController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\GatewayController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\UserController;
 
 Route::prefix('admin')->name('admin.')->group(function () {
     //login pages
@@ -120,5 +122,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // gateways route
         Route::get('gateways/edit', [GatewayController::class, 'edit'])->name('gateways.edit');
         Route::put('gateways', [GatewayController::class, 'update'])->name('gateways.update');
+
+
+        // Customers Route
+        Route::get('customers', [UserController::class, 'index'])->name('customers.index');
+        Route::get('customers/create', [UserController::class, 'create'])->name('customer.create');
+        Route::post('customers', [UserController::class, 'store'])->name('customers.store');
+        Route::get('customers/{id}', [UserController::class, 'show'])->name('customers.show');
+        Route::get('customers/{id}/edit', [UserController::class, 'edit'])->name('customer.edit');
+        Route::put('customers/{id}', [UserController::class, 'update'])->name('customer.update');
+        Route::delete('customers/{id}', [UserController::class, 'destroy'])->name('customer.destroy');
+
+
+        // orders Route
+        Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('orders/create', [OrderController::class, 'create'])->name('order.create');
+        Route::post('orders', [OrderController::class, 'store'])->name('orders.store');
+        Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
+        Route::get('orders/{id}/edit', [OrderController::class, 'edit'])->name('order.edit');
+        Route::put('orders/{id}', [OrderController::class, 'update'])->name('order.update');
+        Route::delete('orders/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
+
     });
 });

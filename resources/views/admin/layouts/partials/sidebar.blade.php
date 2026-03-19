@@ -91,7 +91,7 @@
                 </a>
                 <ul>
                     <li class="">
-                        <a href="orders.html">
+                        <a href="{{ route('admin.orders.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>All Orders</span>
                             <span class="badge bg-info text-white">1</span>
@@ -150,7 +150,7 @@
                 </a>
                 <ul>
                     <li class="">
-                        <a href="customers.html">
+                        <a href="{{ route('admin.customers.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>Customer List</span>
                         </a>

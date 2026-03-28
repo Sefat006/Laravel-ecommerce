@@ -17,11 +17,11 @@ class Purchase extends Model
         'notes',
     ];
 
-    /**
-     * Relationship: Purchase → Supplier
-     */
-    public function supplier()
-    {
-        return $this->belongsTo(Supplier::class);
+    public function SupplierName(){
+        return $this->belongsTo(Supplier::class, 'supplier_id');
+    }
+
+    public function purchaseItems(){
+        return $this->hasMany(Purchase_item::class, 'purchase_id');
     }
 }

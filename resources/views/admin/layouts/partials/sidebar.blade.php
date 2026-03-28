@@ -71,7 +71,7 @@
                 </a>
                 <ul>
                     <li class="">
-                        <a href="create-product.html">
+                        <a href="{{route('admin.products.index')}}">
                             <i class="fa fa-circle"></i>
                             <span>Products</span>
                         </a>
@@ -83,7 +83,7 @@
                         </a>
                     </li>
                     <li class="">
-                        <a href="products.html">
+                        <a href="{{route('admin.purchases.index')}}">
                             <i class="fa fa-circle"></i>
                             <span>Purchases</span>
                         </a>

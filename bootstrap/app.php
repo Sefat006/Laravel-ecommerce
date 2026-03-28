@@ -4,7 +4,7 @@ use App\Http\Middleware\SetLocale;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
-use Illuminate\Session\Middleware\StartSession;
+// use Illuminate\Session\Middleware\StartSession;
 
 use function Pest\Laravel\startSession;
 
@@ -18,7 +18,7 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->append(StartSession::class);
+        // $middleware->append(StartSession::class);
         $middleware->append(SetLocale::class);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

@@ -82,7 +82,3 @@
 </div>
 
 @endsection
-
-@push('scripts')
-<!-- Custom scripts if needed -->
-@endpush

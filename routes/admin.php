@@ -18,7 +18,10 @@ use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PagesController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatesController;
+use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UserController;
+
+
 
 Route::prefix('admin')->name('admin.')->group(function () {
     //login pages
@@ -134,8 +137,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // orders Route
         Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-
-
+        
+        // Transaction Routes
+        Route::get('transactions', [OrderController::class, 'transactions'])->name('transactions.index');
 
 
         // Countries Routes
@@ -157,5 +161,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('states/{id}/edit', [StatesController::class, 'edit'])->name('state.edit');
         Route::put('states/{id}', [StatesController::class, 'update'])->name('state.update');
         Route::delete('states/{id}', [StatesController::class, 'destroy'])->name('state.destroy');
+
+
+
+        // Suppliers Routes
+        Route::get('suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
+        Route::get('suppliers/create', [SupplierController::class, 'create'])->name('supplier.create');
+        Route::post('suppliers', [SupplierController::class, 'store'])->name('suppliers.store');
+        Route::get('suppliers/{id}', [SupplierController::class, 'show'])->name('suppliers.show');
+        Route::get('suppliers/{id}/edit', [SupplierController::class, 'edit'])->name('supplier.edit');
+        Route::put('suppliers/{id}', [SupplierController::class, 'update'])->name('supplier.update');
+        Route::delete('suppliers/{id}', [SupplierController::class, 'destroy'])->name('supplier.destroy');
     });
 });

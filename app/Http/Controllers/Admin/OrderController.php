@@ -28,4 +28,11 @@ class OrderController extends Controller
         $items = Order_item::where('order_id', $id)->get();
         return view('admin.orders.show', compact('order', 'items'));
     }
+
+
+    public function transactions()
+    {
+        $transactions = Order::latest()->get();
+        return view('admin.transactions.index', compact('transactions'));
+    }
 }

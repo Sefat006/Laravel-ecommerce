@@ -34,18 +34,22 @@
                             </div>
                             <div class="switcher-lang-currency">
                                 <div class="lang-switcher">
-                                    <span class="flag"><img src="{{ asset('front/assets/images/language/en.png') }}"
-                                            alt="united-states" /></span>
-                                    <a href="javascript:void(0)" class="lang">
+                                    @if(session('locale') == 'english')
+                                    {{-- Show French switch when English is active --}}
+                                    <span class="flag">
+                                        <img src="{{ asset('front/assets/images/language/fr.png') }}" alt="french">
+                                    </span>
+                                    <a class="lang-text" href="{{ url('/locale/french') }}">French</a>
+                                    @else
+                                    {{-- Show English switch when French is active --}}
+                                    <span class="flag">
+                                        <img src="{{ asset('front/assets/images/language/en.png') }}" alt="united-states">
+                                    </span>
+                                    <a class="lang" href="{{ url('/locale/english') }}">
                                         English
                                         <i class="fas fa-angle-down"></i>
                                     </a>
-                                    <ul class="lang-list">
-                                        <li class="single-lang"><span class="flag"><img
-                                                    src="{{ asset('front/assets/images/language/fr.png') }}" alt="india"></span><a
-                                                class="lang-text" href="/locale/fr">German</a>
-                                        </li>
-                                    </ul>
+                                    @endif
                                 </div>
                             </div>
                             <div class="account-switcher">
@@ -157,17 +161,18 @@
             <nav class="menu-area">
                 <ul class="main-menu">
                     <li class="menu-item menu-item-has-children active">
-                        <a class="menu-link" href="{{url('/')}}">Home</a>
+                        <a class="menu-link" href="{{url('/')}}">{{ __('messages.home') }}</a>
                     </li>
-                    <li class="menu-item "><a class="menu-link" href="{{route('products.index')}}">Shop</a>
-                    </li>
-
-                    <li class="menu-item "><a class="menu-link" href="{{ route('about.us')}}">About Us</a>
-                    </li>
-                    <li class="menu-item ">
-                        <a class="menu-link" href="{{route('contact')}}">Contact</a>
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{route('products.index')}}">{{ __('messages.shop') }}</a>
                     </li>
 
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{ route('about.us')}}">{{ __('messages.aboutus') }}</a>
+                    </li>
+                    <li class="menu-item">
+                        <a class="menu-link" href="{{route('contact')}}">{{ __('messages.contact') }}</a>
+                    </li>
                 </ul>
             </nav>
         </div>

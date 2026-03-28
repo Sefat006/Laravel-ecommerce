@@ -16,8 +16,9 @@ use App\Http\Controllers\Frontend\SubscriberController;
 use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\WelcomeController;
 use App\Http\Controllers\Frontend\WishlistController;
-
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -29,6 +30,22 @@ PUT      → Update existing data in DB
 PATCH    → Update specific fields in DB
 DELETE   → Delete data from DB
 */
+
+
+// for languages
+Route::get('/locale/{lang}', function ($lang) {
+    // These must match your folder names exactly
+    if (!in_array($lang, ['english', 'french'])) {
+        abort(400);
+    }
+
+    Session::put('locale', $lang);
+    App::setLocale($lang);
+
+    return redirect()->back();
+});
+
+
 
 //frontend routes
 Route::get('/', [WelcomeController::class, 'index']);
@@ -81,7 +98,7 @@ Route::post('/subscribe', [SubscriberController::class, 'store'])->name('subscri
 
 Auth::routes();
 
-Route::prefix('user')->group(function(){
+Route::prefix('user')->group(function () {
     Route::get('/profile', [UserController::class, 'index'])->name('user.profile');
     Route::get('/profile/edit', [UserController::class, 'edit'])->name('user.profile.edit');
     Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.profile.update');
@@ -103,7 +120,7 @@ Route::get('/get-shipping/{state_id}', [CheckoutController::class, 'getShipping'
 
 // coupon apply
 Route::post('/coupon/apply', [CouponController::class, 'applyCoupon']);
-Route::get('/order-tracking/{number}', [OrderTrackingController::class, 'orderTracking' ])->name('order.track');
+Route::get('/order-tracking/{number}', [OrderTrackingController::class, 'orderTracking'])->name('order.track');
 Route::post('/change-password', [UserController::class, 'changePassword'])->name('user.change-password');
 
 

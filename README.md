@@ -91,6 +91,14 @@ MAILCHIMP_LIST_ID=your-mailchimp-list-id
 ---
 
 
+
+## Language Translation
+```bash
+php artisan make:middleware SetLocale
+```
+Then Create a folder on the ```resources``` with name 'lang/languages' and open folder with names of the languages you need to add on the website
+---
+
 ### 📂 View Controller Architecture
 ```bash
 app/

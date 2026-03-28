@@ -67,19 +67,31 @@
             <li class="">
                 <a class="has-arrow" href="#">
                     <i class="fab fa-product-hunt"></i>
-                    <span>Products</span>
+                    <span>Products & Inventory</span>
                 </a>
                 <ul>
                     <li class="">
                         <a href="create-product.html">
                             <i class="fa fa-circle"></i>
-                            <span>Add Product</span>
+                            <span>Products</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="{{ route('admin.suppliers.index')}}">
+                            <i class="fa fa-circle"></i>
+                            <span>Suppliers</span>
                         </a>
                     </li>
                     <li class="">
                         <a href="products.html">
                             <i class="fa fa-circle"></i>
-                            <span>Product List</span>
+                            <span>Purchases</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="products.html">
+                            <i class="fa fa-circle"></i>
+                            <span>Stocks</span>
                         </a>
                     </li>
                 </ul>
@@ -100,7 +112,7 @@
                 </ul>
             </li>
             <li class="">
-                <a href="transactions.html">
+                <a href="{{ route('admin.transactions.index') }}">
                     <i class="fas fa-random"></i>
                     <span>Transactions</span>
                 </a>

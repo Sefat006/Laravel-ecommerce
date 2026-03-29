@@ -10,7 +10,7 @@
             <div class="breadcrumb__content">
                 <div class="breadcrumb__content__left">
                     <div class="breadcrumb__title">
-                        <h2>Purchase List</h2>
+                        <h2>Stock List</h2>
                     </div>
                 </div>
                 <div class="breadcrumb__content__right">
@@ -19,7 +19,7 @@
                             <li class="breadcrumb-item">
                                 <a href="{{ route('admin.dashboard') }}">Home</a>
                             </li>
-                            <li class="breadcrumb-item active">Purchases</li>
+                            <li class="breadcrumb-item active">Stocks</li>
                         </ul>
                     </nav>
                 </div>
@@ -33,57 +33,48 @@
             <div class="customers__area bg-style mb-30">
 
                 <!-- Add Button -->
-                <div class="item-title">
-                    <a href="{{ route('admin.purchase.create') }}" class="btn btn-md btn-info">
-                        Add Purchase
-                    </a>
-                </div>
+               
 
                 <div class="customers__table">
                     <table class="table-style dataTable">
                         <thead>
                             <tr>
                                 <th>SL</th>
-                                <th>Supplier Name</th>
-                                <th>Invoice No</th>
-                                <!-- <th>Supplier</th> -->
-                                <th>Total Amount</th>
-                                <th>Purchase Date</th>
-                                <th>Notes</th>
+                                <th>Product Name</th>
+                                <th>Stock Type</th>
+                                <th>Quantity</th>
+                                <th>Reference Type</th>
+                                <th>Reference ID</th>
+                                <th>Note</th>
+                                <th>Purchase Time</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
 
                         <tbody>
-                            @foreach($purchases as $data)
+                            @foreach($stocks as $data)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
 
-                                <td>{{ $data->SupplierName->name ?? 'N/A' }}</td>
+                                <td>{{ $data->productName->en_name ?? 'N/A' }}</td>
 
-                                <td>{{ $data->invoice_number ?? 'N/A' }}</td>
+                                <td>{{ ucfirst($data->stock_type) ?? 'N/A' }}</td>
 
-                                <!-- <td>
-                                    {{ $data->supplier->name ?? 'N/A' }}
-                                </td> -->
+                                <td>{{ $data->quantity ?? '0' }}</td>
 
-                                <td>{{ $data->total_amount ?? '0.00' }}</td>
+                                <td>{{ $data->reference_type ?? 'N/A' }}</td>
 
-                                <td>{{ $data->purchase_date ?? 'N/A' }}</td>
+                                <td>{{ $data->reference_id ?? 'N/A' }}</td>
 
-                                <td>
-                                    {{ \Illuminate\Support\Str::limit($data->notes, 40) }}
-                                </td>
+                                <td>{{ $data->purchase_name?->notes ?? 'N/A' }}</td>
+
+                                <td>{{ $data->stock_date ?? 'N/A' }}</td>
 
                                 <td>
                                     <div class="action_buttons">
 
                                         <!-- Edit -->
-                                        <a href="{{ route('admin.purchase.edit', $data->id) }}" class="btn-action">
-                                            <i class="fas fa-pencil"></i>
-                                        </a>
-
-
+                                      
                                     </div>
                                 </td>
 

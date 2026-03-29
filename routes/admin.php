@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\StatesController;
+use App\Http\Controllers\Admin\StockController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\UserController;
 
@@ -139,7 +140,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // orders Route
         Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
         Route::get('orders/{id}', [OrderController::class, 'show'])->name('orders.show');
-        
+
         // Transaction Routes
         Route::get('transactions', [OrderController::class, 'transactions'])->name('transactions.index');
 
@@ -190,9 +191,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('purchases', [PurchaseController::class, 'index'])->name('purchases.index');
         Route::get('purchases/create', [PurchaseController::class, 'create'])->name('purchase.create');
         Route::post('purchases', [PurchaseController::class, 'store'])->name('purchases.store');
-        Route::get('purchases/{id}', [PurchaseController::class, 'show'])->name('purchases.show');
         Route::get('purchases/{id}/edit', [PurchaseController::class, 'edit'])->name('purchase.edit');
         Route::put('purchases/{id}', [PurchaseController::class, 'update'])->name('purchase.update');
-        Route::delete('purchases/{id}', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
+
+
+        // Stock Routes
+        Route::get('stocks', [StockController::class, 'index'])->name('stocks.index');
+        Route::get('stocks/create', [StockController::class, 'create'])->name('stock.create');
+        Route::get('currentStock', [StockController::class, 'currentStock'])->name('stock.currentStock');
+        // Route::post('stocks', [StockController::class, 'store'])->name('stocks.store');
+        // Route::get('stocks/{id}/edit', [StockController::class, 'edit'])->name('stock.edit');
+        // Route::put('stocks/{id}', [StockController::class, 'update'])->name('stock.update');
     });
 });

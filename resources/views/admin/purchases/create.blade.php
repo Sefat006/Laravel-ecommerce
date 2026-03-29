@@ -1,173 +1,217 @@
 @extends('admin.layouts.app')
 
 @section('content')
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <div class="breadcrumb__content">
                 <div class="breadcrumb__content__left">
                     <div class="breadcrumb__title">
-                        <h2>Create Product</h2>
+                        <h2>Create Purchase</h2>
                     </div>
                 </div>
                 <div class="breadcrumb__content__right">
-                    <nav aria-label="breadcrumb">
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                            <li class="breadcrumb-item active" aria-current="page">Product</li>
-                        </ul>
-                    </nav>
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Purchase</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Form Row -->
-    <div class="row">
-        <div class="col-md-12">
-            <div class="gallery__area bg-style">
-                <div class="gallery__content">
-                    <div class="tab-content" id="nav-tabContent">
-                        <div class="tab-pane fade show active" id="nav-one" role="tabpanel">
-                            <form enctype="multipart/form-data" method="POST" action="{{ route('admin.products.store') }}">
-                                @csrf
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="form-vertical__item bg-style">
+    <form method="POST" action="{{ route('admin.purchases.store') }}">
+        @csrf
 
-                                            <!-- Product Name -->
-                                            <div class="input__group mb-25">
-                                                <label for="en_name">Product Name</label>
-                                                <input type="text" id="en_name" name="en_name" value="{{ old('en_name') }}" placeholder="Product name">
-                                            </div>
-
-                                            <!-- Category -->
-                                            <div class="input__group mb-25">
-                                                <label for="category_id">Category</label>
-                                                <select name="category_id" id="category_id">
-                                                    <option value="">-- Select Category --</option>
-                                                    @foreach($categories as $category)
-                                                    <option value="{{ $category->id }}">{{ $category->en_category_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <!-- Brand -->
-                                            <div class="input__group mb-25">
-                                                <label for="brand_id">Brand</label>
-                                                <select name="brand_id" id="brand_id">
-                                                    <option value="">-- Select Brand --</option>
-                                                    @foreach($brands as $brand)
-                                                    <option value="{{ $brand->id }}">{{ $brand->en_brand_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
-                                            <!-- Description -->
-                                            <div class="input__group mb-25">
-                                                <label for="en_desc">Description</label>
-                                                <textarea id="en_desc" name="en_desc" placeholder="Description">{{ old('en_desc') }}</textarea>
-                                            </div>
-
-                                            <!-- Shipping Info -->
-                                            <div class="input__group mb-25">
-                                                <label for="en_shipping">Shipping Info</label>
-                                                <textarea id="en_shipping" name="en_shipping" placeholder="Shipping information">{{ old('en_shipping') }}</textarea>
-                                            </div>
-
-                                            <!-- Additional Info -->
-                                            <div class="input__group mb-25">
-                                                <label for="en_additional_info">Additional Info</label>
-                                                <textarea id="en_additional_info" name="en_additional_info" placeholder="Additional information">{{ old('en_additional_info') }}</textarea>
-                                            </div>
-
-                                            <!-- Price -->
-                                            <div class="input__group mb-25">
-                                                <label for="price">Price</label>
-                                                <input type="text" id="price" name="price" value="{{ old('price') }}" placeholder="Price">
-                                            </div>
-
-                                            <!-- Discount -->
-                                            <div class="input__group mb-25">
-                                                <label for="discount">Discount (%)</label>
-                                                <input type="text" id="discount" name="discount" value="{{ old('discount') }}" placeholder="Discount in %">
-                                            </div>
-
-                                            <!-- Discounted Price -->
-                                            <div class="input__group mb-25">
-                                                <label for="discounted_price">Discounted Price</label>
-                                                <input type="text" id="discounted_price" name="discounted_price" value="{{ old('discounted_price') }}" placeholder="Discounted price">
-                                            </div>
-
-                                            <div class="input__group mb-25">
-                                                <label for="quantity">Quantity</label>
-                                                <input type="number" id="quantity" name="quantity" value="{{ old('quantity', 0) }}" placeholder="Quantity">
-                                            </div>
-
-                                            <!-- Product Image -->
-                                            <div class="input__group mb-25">
-                                                <label for="thumb">Product Image</label>
-                                                <input type="file" class="putImage2" name="thumb" id="thumb">
-                                            </div>
-
-                                            <!-- Meta Title -->
-                                            <div class="input__group mb-25">
-                                                <label for="meta_title">Meta Title</label>
-                                                <input type="text" id="meta_title" name="meta_title" value="{{ old('meta_title') }}" placeholder="Meta title">
-                                            </div>
-
-                                            <!-- Meta Description -->
-                                            <div class="input__group mb-25">
-                                                <label for="meta_description">Meta Description</label>
-                                                <textarea id="meta_description" name="meta_description" placeholder="Meta description">{{ old('meta_description') }}</textarea>
-                                            </div>
-
-                                            <!-- Meta Keywords -->
-                                            <div class="input__group mb-25">
-                                                <label for="meta_keywords">Meta Keywords</label>
-                                                <input type="text" id="meta_keywords" name="meta_keywords" value="{{ old('meta_keywords') }}" placeholder="Meta keywords">
-                                            </div>
-
-                                            <!-- Status -->
-                                            <div class="input__group mb-25">
-                                                <label for="status">Status</label>
-                                                <select name="status" id="status">
-                                                    <option value="1">Active</option>
-                                                    <option value="0">Inactive</option>
-                                                </select>
-                                            </div>
-
-
-
-                                            {{-- Feature Flags --}}
-                                            <div class="input__group mb-25">
-                                                <label><input type="checkbox" name="is_featured"
-                                                        value="1"> Featured</label><br>
-                                                <label><input type="checkbox" name="is_best_selling"
-                                                        value="1"> Best Selling</label><br>
-                                                <label><input type="checkbox" name="is_new_arrival"
-                                                        value="1"> New Arrival</label><br>
-                                                <label><input type="checkbox" name="is_onsale"
-                                                        value="1"> On Sale</label>
-                                            </div>
-
-                                            <!-- Submit -->
-                                            <div class="input__button">
-                                                <button type="submit" class="btn btn-blue">Create</button>
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-vertical__item bg-style">
+                    <div class="item-title">
+                        <h4>Purchase Information</h4>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="input__group mb-25">
+                                <label>Supplier <span class="text-danger">*</span></label>
+                                <select name="supplier_id" class="form-control">
+                                    <option value="">-- Select Supplier --</option>
+                                    @foreach($suppliers as $supplier)
+                                    <option value="{{ $supplier->id }}">{{ $supplier->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input__group mb-25">
+                                <label>Invoice Number</label>
+                                <input type="text" name="invoice_number" placeholder="INV-001">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input__group mb-25">
+                                <label>Purchase Date <span class="text-danger">*</span></label>
+                                <input type="date" name="purchase_date" value="{{ date('Y-m-d') }}">
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="input__group mb-25">
+                                <label>Notes</label>
+                                <textarea name="notes" rows="2" placeholder="Optional notes"></textarea>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
+        <div class="row mt-30">
+            <div class="col-md-12">
+                <div class="customers__area bg-style">
+                    <div class="item-title d-flex justify-content-between align-items-center">
+                        <h4>Add Products</h4>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table-style" id="productTable" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th style="width: 45%;">Product</th>
+                                    <th style="width: 120px;" class="text-center">Qty</th>
+                                    <th style="width: 150px;" class="text-center">Price</th>
+                                    <th style="width: 150px;" class="text-center">Subtotal</th>
+                                    <th style="width: 80px;" class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <select name="product_id[]" class="form-control" style="width: 100%;" required>
+                                            <option value="">Select Product</option>
+                                            @foreach($products as $product)
+                                            <option value="{{ $product->id }}">{{ $product->en_name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <input type="number" name="quantity[]" class="qty text-center" value="1" min="1" style="width: 100%;">
+                                    </td>
+                                    <td>
+                                        <input type="number" step="0.01" name="price[]" class="price text-center" placeholder="0.00" style="width: 100%;">
+                                    </td>
+                                    <td>
+                                        <input type="text" class="subtotal text-center" value="0.00" readonly style="width: 100%;">
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-danger btn-sm removeRow">X</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" id="addRow" class="btn btn-info btn-sm mb-20">+ Add Row</button>
+                    </div>
+
+                    <div class="justify-content-start mb-20">
+                        <div class="col-md-4">
+                            <div class="input__group">
+                                <label class="fw-bold">Grand Total</label>
+                                <input type="text" name="total_amount" id="totalAmount" class="form-control text-center fw-bold" readonly value="0.00">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input__button mt-20">
+                        <button type="submit" class="btn btn-blue">Save Purchase</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
-
 @endsection
+
+@push('scripts')
+@push('scripts')
+<script>
+    // Create row (MATCHES your existing HTML exactly)
+    function createRow() {
+        return `
+        <tr>
+            <td>
+                <select name="product_id[]" class="form-control" style="width: 100%;" required>
+                    <option value="">Select Product</option>
+                    @foreach($products as $product)
+                        <option value="{{ $product->id }}">{{ $product->en_name }}</option>
+                    @endforeach
+                </select>
+            </td>
+            <td>
+                <input type="number" name="quantity[]" class="qty text-center" value="1" min="1" style="width: 100%;">
+            </td>
+            <td>
+                <input type="number" step="0.01" name="price[]" class="price text-center" placeholder="0.00" style="width: 100%;">
+            </td>
+            <td>
+                <input type="text" class="subtotal text-center" value="0.00" readonly style="width: 100%;">
+            </td>
+            <td class="text-center">
+                <button type="button" class="btn btn-danger btn-sm removeRow">X</button>
+            </td>
+        </tr>`;
+    }
+
+    // Add row
+    document.getElementById('addRow').addEventListener('click', function() {
+        document.querySelector('#productTable tbody')
+            .insertAdjacentHTML('beforeend', createRow());
+    });
+
+    // Remove row (fixed click handling)
+    document.addEventListener('click', function(e) {
+        const btn = e.target.closest('.removeRow');
+        if (btn) {
+            const rows = document.querySelectorAll('#productTable tbody tr');
+
+            if (rows.length > 1) {
+                btn.closest('tr').remove();
+                calculateTotal();
+            } else {
+                alert("At least one product is required.");
+            }
+        }
+    });
+
+    // Calculate subtotal (LIVE)
+    document.addEventListener('input', function(e) {
+        if (e.target.classList.contains('qty') || e.target.classList.contains('price')) {
+
+            const row = e.target.closest('tr');
+
+            const qty = parseFloat(row.querySelector('.qty').value) || 0;
+            const price = parseFloat(row.querySelector('.price').value) || 0;
+
+            const subtotal = qty * price;
+
+            row.querySelector('.subtotal').value = subtotal.toFixed(2);
+
+            calculateTotal();
+        }
+    });
+
+    // Calculate grand total
+    function calculateTotal() {
+        let total = 0;
+
+        document.querySelectorAll('#productTable tbody .subtotal').forEach(function(el) {
+            total += parseFloat(el.value) || 0;
+        });
+
+        document.getElementById('totalAmount').value = total.toFixed(2);
+    }
+
+    // Initial calculation (important)
+    document.addEventListener('DOMContentLoaded', function() {
+        calculateTotal();
+    });
+</script>
+@endpush
+@endpush

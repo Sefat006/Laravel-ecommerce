@@ -62,4 +62,9 @@ class Product extends Model
     {
         return $this->hasMany(Review::class, 'product_id');
     }
+
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class, 'product_id');
+    }
 }

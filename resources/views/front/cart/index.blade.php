@@ -206,10 +206,10 @@
                     if (response.success) {
                         // Increase quantity by 1 and update the input field
                         qtyInput.val(currentQty + 1);
-                        toastr.success('Product added to cart!', 'Success');
+                        toastr.success(response.message, 'Success');
                         window.location.reload();
                     } else {
-                       toastr.error('Product is not increased!', 'Error');
+                        toastr.error(response.message, 'Error');
                     }
                 },
                 error: function() {

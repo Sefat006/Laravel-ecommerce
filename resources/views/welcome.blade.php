@@ -150,8 +150,13 @@ $newarrival = $data['newarrival'];
                             <span class="regular-price">$ {{ $product->price ?? "" }}</span>
                             <span class="price">$ {{ $product->discounted_price ?? "" }}</span>
                         </div>
-                        <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $product->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i>
+                        @if(getCurrentStock($product->id) > 0 )
+                        <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $product->id }}">
+                            Add To Cart <i class="icon fas fa-plus-circle"></i>
                         </a>
+                        @else
+                        <span class="text-danger">Out of Stock</span>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -254,7 +259,7 @@ $newarrival = $data['newarrival'];
                                     </li>
                                     <li class="single-product-btn">
                                         <a href="javascript:void()" class="product-btn addtoWishlist" data-id="{{$product->id}}" title="Add To Wishlist"><i
-                                        class="icon flaticon-like"></i></a>
+                                                class="icon flaticon-like"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -276,7 +281,13 @@ $newarrival = $data['newarrival'];
                                     <span class="regular-price">$ {{ $newarrival->price ?? "" }}</span>
                                     <span class="price">$ {{ $newarrival->discounted_price ?? "" }}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $newarrival->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
+                                @if(getCurrentStock($product->id) > 0 )
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $newarrival->id }}">
+                                    Add To Cart <i class="icon fas fa-plus-circle"></i>
+                                </a>
+                                @else
+                                <span class="text-danger">Out of Stock</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -301,7 +312,7 @@ $newarrival = $data['newarrival'];
                                     </li>
                                     <li class="single-product-btn">
                                         <a href="javascript:void()" class="product-btn addtoWishlist" data-id="{{$product->id}}" title="Add To Wishlist"><i
-                                        class="icon flaticon-like"></i></a>
+                                                class="icon flaticon-like"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -323,7 +334,13 @@ $newarrival = $data['newarrival'];
                                     <span class="regular-price">$ {{ $bestselling->price ?? "" }}</span>
                                     <span class="price">$ {{ $bestselling->discounted_price ?? ""}}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $bestselling->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
+                                @if(getCurrentStock($product->id) > 0 )
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $bestselling->id }}">
+                                    Add To Cart <i class="icon fas fa-plus-circle"></i>
+                                </a>
+                                @else
+                                <span class="text-danger">Out of Stock</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -349,7 +366,7 @@ $newarrival = $data['newarrival'];
                                     </li>
                                     <li class="single-product-btn">
                                         <a href="javascript:void()" class="product-btn addtoWishlist" data-id="{{$product->id}}" title="Add To Wishlist"><i
-                                        class="icon flaticon-like"></i></a>
+                                                class="icon flaticon-like"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -371,7 +388,13 @@ $newarrival = $data['newarrival'];
                                     <span class="regular-price">$ {{ $onsale->price ?? ""}}</span>
                                     <span class="price">$ {{ $onsale->discounted_price ?? ""}}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $onsale->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
+                                @if(getCurrentStock($product->id) > 0 )
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $onsale->id }}">
+                                    Add To Cart <i class="icon fas fa-plus-circle"></i>
+                                </a>
+                                @else
+                                <span class="text-danger">Out of Stock</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -396,7 +419,7 @@ $newarrival = $data['newarrival'];
                                     </li>
                                     <li class="single-product-btn">
                                         <a href="javascript:void()" class="product-btn addtoWishlist" data-id="{{$product->id}}" title="Add To Wishlist"><i
-                                        class="icon flaticon-like"></i></a>
+                                                class="icon flaticon-like"></i></a>
                                     </li>
                                 </ul>
                             </div>
@@ -418,8 +441,13 @@ $newarrival = $data['newarrival'];
                                     <span class="regular-price">$ {{ $featured->price ?? ""}}</span>
                                     <span class="price">$ {{ $featured->discounted_price ?? ""}}</span>
                                 </div>
-                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="$featured->id">Add To Cart <i class="icon fas fa-plus-circle"></i>
+                                @if(getCurrentStock($product->id) > 0 )
+                                <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="$featured->id">
+                                    Add To Cart <i class="icon fas fa-plus-circle"></i>
                                 </a>
+                                @else
+                                <span class="text-danger">Out of Stock</span>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -445,7 +473,6 @@ $newarrival = $data['newarrival'];
 
 @push('scripts') <!-- to app.blade.php, all the pages where "Add to Cart" button is placed -->
 <script type="text/javascript">
-
     $(document).ready(function() {
         $('.addToCart').on('click', function(e) {
             e.preventDefault();
@@ -506,7 +533,7 @@ $newarrival = $data['newarrival'];
                         }
                     },
                     error: function(xhr, status, error) {
-                         console.log(xhr.responseText); // 
+                        console.log(xhr.responseText); // 
                         alert('An error occurred. Please try again.');
                     }
                 });
@@ -514,7 +541,7 @@ $newarrival = $data['newarrival'];
         });
 
         // add compare js
-         $('.addtoCompare').on('click', function() {
+        $('.addtoCompare').on('click', function() {
             var productId = $(this).data('id');
 
             if (confirm("Are you sure you want to add this product for comparison?")) {
@@ -539,14 +566,13 @@ $newarrival = $data['newarrival'];
                         }
                     },
                     error: function(xhr, status, error) {
-                         console.log(xhr.responseText); // 
+                        console.log(xhr.responseText); // 
                         alert('An error occurred. Please try again.');
                     }
                 });
             }
         });
     });
-
 </script>
 
 

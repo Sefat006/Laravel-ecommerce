@@ -350,7 +350,7 @@
                                         <h4 class="product-catagory">{{ $product->brand->en_brand_name }} - {{ $product->category->en_category_name}}</h4>
                                         <input type="hidden" name="quantity" value="1" id="product_quantity">
                                         <h3 class="product-name"><a class="product-link"
-                                                href="/product/single/fit-flare-dress-2">{{ $product->en_name ?? ""}}</a>
+                                                href="{{ route('product.details' , $product->slug )}}">{{ $product->en_name ?? ""}}</a>
                                         </h3>
                                         <!-- This is server side code. User can not modify it. -->
                                         <ul class="product-review">
@@ -362,11 +362,15 @@
                                         </ul>
                                         <div class="product-price">
                                             <span class="regular-price">$ {{ $product->price }}</span>
-                                            <span class="price">$ {{ $product->discounted_price }}</span>
+                                            <span class="price">$ {{ $product->discounted_price ?? "" }}</span>
                                         </div>
+                                        @if(getCurrentStock($product->id) > 0 )
                                         <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $product->id }}">
                                             Add To Cart <i class="icon fas fa-plus-circle"></i>
                                         </a>
+                                        @else
+                                            <span class="text-danger">Out of Stock</span>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

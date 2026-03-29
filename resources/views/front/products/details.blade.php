@@ -124,12 +124,16 @@
                                 <a class="product-btn CompareList" data-id="5" title="Add To Compare"><i
                                         class="icon flaticon-bar-chart"></i></a>
                             </div>
+                            @if(getCurrentStock($product->id) > 0 )
                             <div class="product-bottom-button d-flex">
                                 <a href="javascript:void(0)" class="primary-btn buyNow" data-id="5">Buy Now</a>
                                 <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart"
                                     data-id="{{ $product->id }}">Add To Cart
                                     <i class="icon fas fa-plus-circle"></i></a>
                             </div>
+                            @else
+                            <span class="text-danger">Out of Stock</span>
+                            @endif
                         </div>
                         <div class="product-right-bottom">
                             <ul class="features">
@@ -219,11 +223,11 @@
                                 <span class="review-point"> {{$averageRating}} </span>
                                 <!-- This is server side code. User can not modify it. -->
                                 <ul class="product-review">
-                                   @for($i=1; $i<=5; $i++)
+                                    @for($i=1; $i<=5; $i++)
                                         <li class="review-item">
                                         <i class="flaticon-star" style="color: {{ $i <= $averageRating ? '#FFD700' : '#ccc' }};"> </i>
                                         </li>
-                                    @endfor
+                                        @endfor
                                 </ul>
                                 <span class="review-count">{{ $product->reviews->count() }} Reviews</span>
                             </div>
@@ -352,7 +356,11 @@
                             <span class="regular-price">$ {{ $relatedProduct->price ?? "" }}</span>
                             <span class="price">$ {{ $relatedProduct->discounted_price ?? "" }}</span>
                         </div>
+                        @if(getCurrentStock($product->id) > 0 )
                         <a href="javascript:void(0)" title="Add To Cart" class="add-cart addToCart" data-id="{{ $relatedProduct->id }}">Add To Cart <i class="icon fas fa-plus-circle"></i></a>
+                        @else
+                        <span class="text-danger">Out of Stock</span>
+                        @endif
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
@@ -14,7 +15,8 @@ class CartController extends Controller
     }
 
     // Add product to cart (placeholder)
-    public function addToCart(Request $request){
+    public function addToCart(Request $request)
+    {
 
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity', 1);
@@ -30,6 +32,23 @@ class CartController extends Controller
 
         // Get cart from session
         $cart = session()->get('cart', []);
+
+        // Calculate current stock directly from stock table
+        $stock_in = Stock::where('product_id', $product_id)->where('stock_type', 'in')->sum('quantity');
+        $stock_out = Stock::where('product_id', $product_id)->where('stock_type', 'out')->sum('quantity');
+        $current_stock = $stock_in - $stock_out;
+
+        $existing_quantity = isset($cart[$product_id]) ? $cart[$product_id]['quantity'] : 0;
+
+        // Total quantity if adding 1 more
+        $new_quantity = $existing_quantity + $quantity;
+
+        if ($new_quantity > $current_stock) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Only ' . $current_stock . ' items in stock. Cannot add more to cart.'
+            ]);
+        }
 
         if (isset($cart[$product_id])) {
             $cart[$product_id]['quantity'] += $quantity;
@@ -60,7 +79,6 @@ class CartController extends Controller
             'cart_count' => $cartCount,
             'total_price' => number_format($totalPrice, 2)
         ]);
-
     }
 
     public function removeFromCart(Request $request)
@@ -87,14 +105,29 @@ class CartController extends Controller
         $cart = session()->get('cart', []);
         $product_id = $request->input('product_id');
 
-        if (isset($cart[$product_id])) {
-            // Increase quantity by 1
-            $cart[$product_id]['quantity']++;
-            session()->put('cart', $cart);
-            return response()->json(['success' => true]);
+        // ✅ Get current cart quantity
+        $current_quantity = $cart[$product_id]['quantity'];
+
+        // ✅ Calculate current stock from stock table
+        $stock_in = Stock::where('product_id', $product_id)->where('stock_type', 'in')->sum('quantity');
+        $stock_out = Stock::where('product_id', $product_id)->where('stock_type', 'out')->sum('quantity');
+        $current_stock = $stock_in - $stock_out;
+
+        if ($current_quantity >= $current_stock) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Cannot increase quantity. Only ' . $current_stock . ' items in stock.'
+            ]);
         }
 
-        return response()->json(['success' => false]);
+        // ✅ Increase quantity
+        $cart[$product_id]['quantity']++;
+        session()->put('cart', $cart);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Product added to cart!'
+        ]);
     }
 
     // Decrease Quantity
@@ -118,5 +151,4 @@ class CartController extends Controller
 
         return response()->json(['success' => false]);
     }
-
 }

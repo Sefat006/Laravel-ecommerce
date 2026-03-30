@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use App\Models\Compare;
+use App\Models\Deliveryman_notification;
 use App\Models\Order;
 use App\Models\Setting;
 use App\Models\Stock;
@@ -76,5 +77,29 @@ if (!function_exists('getCurrentStock')) {
             ->sum('quantity');
 
         return $stock_in - $stock_out;
+    }
+}
+
+
+if (!function_exists('unreadNotificationCount')) {
+    function unreadNotificationCount()
+    {
+        if (Auth::check() && Auth::user()->isDeliveryman()) {
+            return Deliveryman_notification::where('deliveryman_id', Auth::id())
+                ->where('is_read', false)
+                ->count();
+        }
+        return 0;
+    }
+}
+
+
+if (!function_exists('assignedOrderCount')) {
+    function assignedOrderCount()
+    {
+        if (Auth::check() && Auth::user()->isDeliveryman()) {
+            return Order::where('deliveryman_id', Auth::id())->count();
+        }
+        return 0;
     }
 }

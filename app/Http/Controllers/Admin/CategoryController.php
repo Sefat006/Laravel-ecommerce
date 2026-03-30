@@ -45,7 +45,7 @@ class CategoryController extends Controller
 
         if ($request->hasFile('image')) {
             $iconName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('front/assets/images'), $iconName);
+            $request->image->move(public_path('front/assets/images/categories_icon'), $iconName);
         }
 
         Category::create([
@@ -94,12 +94,12 @@ class CategoryController extends Controller
 
         if ($request->hasFile('image')) {
             // Delete old image if it exists
-            if ($category->icon && file_exists(public_path('front/assets/images/' . $category->icon))) {
-                unlink(public_path('front/assets/images/' . $category->icon)); // ✅ was $category->image
+            if ($category->icon && file_exists(public_path('front/assets/images/categories_icon/' . $category->icon))) {
+                unlink(public_path('front/assets/images/categories_icon/' . $category->icon)); // ✅ was $category->image
             }
 
             $iconName = time() . '.' . $request->image->extension();
-            $request->image->move(public_path('front/assets/images'), $iconName);
+            $request->image->move(public_path('front/assets/images/categories_icon'), $iconName);
         }
 
         $category->update([
@@ -124,7 +124,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         // Delete image
-        $imagePath = public_path('front/assets/images/' . $category->image);
+        $imagePath = public_path('front/assets/images/categories_icon/' . $category->image);
         if (File::exists($imagePath)) {
             File::delete($imagePath);
         }

@@ -68,7 +68,7 @@
                                 <td>{{ $data->slug }}</td>
 
                                 <td>
-                                        <img width="50" src="{{ asset('front/assets/images/'.$data->icon) }}" alt="icon">
+                                        <img width="50" src="{{ asset('front/assets/images/categories_icon/'.$data->icon) }}" alt="icon">
                                 </td>
 
                                 <td>{{ $data->en_short_info }}</td>

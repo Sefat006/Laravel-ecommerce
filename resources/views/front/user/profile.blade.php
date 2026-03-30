@@ -2,7 +2,6 @@
 
 
 <!-- -------------- these are for dynamic meta header -------------------->
-<!-- used in app.blade.php-- -->
 @section('title', "Customer Profile")
 @section('description', "Profile")
 @section('keywords', "Customer Profile")
@@ -10,6 +9,8 @@
 
 
 @section('content')
+
+@php $user = Auth::user(); @endphp
 
 <!-- breadcrumb area start here  -->
 <div class="breadcrumb-area">
@@ -34,18 +35,45 @@
                 <div class="section-wrap account-page-sidemenu user-profile-sidebar">
                     <nav class="account-page-menu">
                         <ul>
-                            <li class="{{ request()->routeIs('user.profile') ? 'active' : '' }}">
-                                <a href="{{ route('user.profile') }}"><i class="fas fa-user"></i> My Profile</a>
+
+                            {{-- Profile --}}
+                            <li class="{{ request()->routeIs('user.profile') || request()->routeIs('delivery.profile') ? 'active' : '' }}">
+                                <a href="{{ $user->user_type === 'deliveryman' ? route('delivery.profile') : route('user.profile') }}">
+                                    <i class="fas fa-user"></i> My Profile
+                                </a>
                             </li>
 
+                            {{-- CUSTOMER MENU --}}
+                            @if($user->user_type === 'customer')
                             <li class="{{ request()->routeIs('user.orders') ? 'active' : '' }}">
-                                <a href="{{ route('user.orders') }}"><i class="fas fa-box-open"></i> My Order</a>
+                                <a href="{{ route('user.orders') }}">
+                                    <i class="fas fa-box-open"></i> My Order
+                                </a>
                             </li>
 
                             <li class="{{ request()->routeIs('user.reviews') ? 'active' : '' }}">
-                                <a href="{{ route('user.reviews') }}"><i class="fas fa-user-edit"></i> My Review</a>
+                                <a href="{{ route('user.reviews') }}">
+                                    <i class="fas fa-user-edit"></i> My Review
+                                </a>
                             </li>
-                            
+                            @endif
+
+                            {{-- DELIVERYMAN MENU --}}
+                            @if($user->user_type === 'deliveryman')
+                            <li class="{{ request()->routeIs('delivery.all.orders') ? 'active' : '' }}">
+                                <a href="{{ route('delivery.all.orders') }}">
+                                    <i class="fas fa-box"></i> All Orders
+                                </a>
+                            </li>
+
+                            <li class="{{ request()->routeIs('delivery.assigned.orders') ? 'active' : '' }}">
+                                <a href="{{ route('delivery.assigned.orders') }}">
+                                    <i class="fas fa-truck"></i> Assigned Orders
+                                </a>
+                            </li>
+                            @endif
+
+                            {{-- Logout --}}
                             <li>
                                 <a href="{{ route('logout') }}"
                                     onclick="event.preventDefault(); 
@@ -56,10 +84,12 @@
                                     @csrf
                                 </form>
                             </li>
+
                         </ul>
                     </nav>
                 </div>
             </div>
+
             <div class="col-xl-9 col-lg-8">
                 <div class="user-profile-right-part">
                     <div class="user-profile-content-box">
@@ -86,7 +116,6 @@
                                 <div class="address-box card">
                                     <h3 class="text-black">Order Status</h3>
                                     <ul>
-                                        <!-- orderStatusCount() helper function  -->
                                         <li>Pending: {{ orderStatusCount('pending') }}</li>
                                         <li>Processing: {{ orderStatusCount('processing') }}</li>
                                         <li>Shipped: {{ orderStatusCount('shipped') }}</li>
@@ -109,10 +138,10 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 </div>
 <!-- Profile Page area end here  -->
-
 
 @endsection

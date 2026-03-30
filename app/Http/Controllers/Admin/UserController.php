@@ -11,12 +11,19 @@ class UserController extends Controller
 {
     public function index()
     {
-        $customers = User::latest()->get();
+        // $customers = User::latest()->get();
+        // $ordered_customers = User::with('orders')->latest()->get();
+        // return view('admin.customers.index', compact('customers', 'ordered_customers'));
+
+        $customers = User::with('orders')->latest()->get();
         return view('admin.customers.index', compact('customers'));
     }
 
 
-
+    public function edit($id)
+    {
+        return view('admin.customers.edit');
+    }
 
 
     public function destroy($id)

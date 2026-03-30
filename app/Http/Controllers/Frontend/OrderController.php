@@ -48,8 +48,8 @@ class OrderController extends Controller
             'bank'       => 'bank_transfer',
             'creditcard' => 'credit_card',
             'paypal'     => 'paypal',
-            'razorpay'   => 'credit_card',
-            'sslcommerz' => 'credit_card',
+            'razorpay'   => 'razorpay',
+            'sslcommerz' => 'sslcommerz',
         ];
         $paymentMethod = $paymentMap[$request->payment] ?? 'cod';
 

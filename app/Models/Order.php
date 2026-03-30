@@ -42,4 +42,15 @@ class Order extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+
+    public function deliveryman()
+    {
+        return $this->belongsTo(User::class, 'deliveryman_id');
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Deliveryman_notification::class, 'order_id');
+    }
 }

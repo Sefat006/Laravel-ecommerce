@@ -42,6 +42,7 @@
                                 <th>Order Number</th>
                                 <th>Discounted Amount</th>
                                 <th>Tax Amount ($)</th>
+                                <th>Order Amount</th>
                                 <th>Shipping Amount ($)</th>
                                 <th>Subtotal Amount</th>
                                 <th>Payment Method</th>

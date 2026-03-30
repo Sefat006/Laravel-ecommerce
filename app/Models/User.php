@@ -17,15 +17,16 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
-        protected $fillable = [
-            'name',
-            'email',
-            'password',
-            'phone',
-            'address',
-            'zipcode',
-            'image',
-        ];
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'phone',
+        'address',
+        'zipcode',
+        'image',
+        'user_type',
+    ];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -36,6 +37,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+
 
     /**
      * Get the attributes that should be cast.
@@ -48,5 +50,37 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+
+
+    public function isDeliveryman(): bool
+    {
+        return $this->user_type === 'deliveryman';
+    }
+
+    public function isCustomer(): bool
+    {
+        return $this->user_type === 'customer';
+    }
+
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
+
+
+     // Orders assigned to this deliveryman
+    public function assignedOrders()
+    {
+        return $this->hasMany(Order::class, 'deliveryman_id');
+    }
+
+    // Notifications for this deliveryman
+    public function deliveryNotifications()
+    {
+        return $this->hasMany(Deliveryman_notification::class, 'deliveryman_id');
     }
 }

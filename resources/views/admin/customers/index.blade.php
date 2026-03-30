@@ -47,27 +47,28 @@
 
                         <tbody>
                             @foreach($customers as $data)
+
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
 
                                 <td>
                                     @if($data->image)
-                                        <img width="50" src="{{ asset('uploads/users/'.$data->image) }}" alt="user-image" style="border-radius: 50%;">
+                                    <img width="50" src="{{ asset('uploads/users/'.$data->image) }}" alt="user-image" style="border-radius: 50%;">
                                     @else
-                                        <img width="50" src="{{ asset('admin/assets/images/default-user.png') }}" alt="default">
+                                    <img width="50" src="{{ asset('admin/assets/images/default-user.png') }}" alt="default">
                                     @endif
                                 </td>
 
                                 <td>{{ $data->name }}</td>
-                                
+
                                 <td>{{ $data->email }}</td>
 
                                 <td>{{ $data->phone }}</td>
 
                                 <td>{{ $data->address }}</td>
 
-                                <td>{{ $data->zipcode }}</td>
-
+                                <td>{{ optional($data->orders->first())->shipping_zipcode ?? '' }}</td>
+                                
                                 <td>
                                     <div class="action_buttons">
 

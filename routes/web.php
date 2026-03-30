@@ -17,6 +17,7 @@ use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\Frontend\WelcomeController;
 use App\Http\Controllers\Frontend\WishlistController;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
@@ -106,6 +107,16 @@ Route::prefix('user')->group(function () {
     Route::get('/orders', [UserController::class, 'orders'])->name('user.orders');
     Route::get('/order-details/{id}', [UserController::class, 'orderDetails'])->name('user.order.details');
     Route::get('/reviews', [UserController::class, 'reviews'])->name('user.reviews');
+});
+
+
+Route::middleware(['auth', 'deliveryman'])->prefix('deliveryman')->group(function () {
+
+    Route::get('/profile', [UserController::class, 'index'])->name('delivery.profile');
+    Route::get('/orders', [UserController::class, 'allOrders'])->name('delivery.all.orders');
+    Route::get('/assigned-orders', [UserController::class, 'assignedOrders'])->name('delivery.assigned.orders');
+    // In your deliveryman route group
+    Route::post('/order/{id}/delivered', [UserController::class, 'markDelivered'])->name('delivery.mark.delivered');
 });
 
 

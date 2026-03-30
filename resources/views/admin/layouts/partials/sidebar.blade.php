@@ -112,7 +112,7 @@
                         <a href="{{ route('admin.orders.index') }}">
                             <i class="fa fa-circle"></i>
                             <span>All Orders</span>
-                            <span class="badge bg-info text-white">1</span>
+                            <span class="badge bg-info text-white">{{ $orderCount }}</span>
                         </a>
                     </li>
                 </ul>
@@ -123,18 +123,18 @@
                     <span>Transactions</span>
                 </a>
             </li>
-            <li class="">
+            <!-- <li class="">
                 <a href="assets/country-tax-list">
                     <i class="fas fa-percent"></i>
                     <span>Tax Settings</span>
                 </a>
-            </li>
-            <li class="">
+            </li> -->
+            <!-- <li class="">
                 <a href="assets/delivery-charge-list">
                     <i class="fas fa-shipping-fast"></i>
                     <span>Delivery Charge</span>
                 </a>
-            </li>
+            </li> -->
             <li class="">
                 <a href="{{ route('admin.coupons.index')}}">
                     <i class="fas fa-code"></i>
@@ -219,7 +219,7 @@
                     <span>faq</span>
                 </a>
             </li>
-            <li class="">
+            <!-- <li class="">
                 <a class="has-arrow" href="#">
                     <i class="fas fa-cube"></i>
                     <span>SEO Management</span>
@@ -298,7 +298,7 @@
                         </a>
                     </li>
                 </ul>
-            </li>
+            </li> -->
 
             <li class="">
                 <a href="{{route('admin.gateways.edit')}}">

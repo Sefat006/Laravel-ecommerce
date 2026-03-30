@@ -134,6 +134,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Customers Route
         Route::get('customers', [UserController::class, 'index'])->name('customers.index');
+        Route::get('customers/{id}/edit', [UserController::class, 'edit'])->name('customer.edit');
         Route::delete('customers/{id}', [UserController::class, 'destroy'])->name('customer.destroy');
 
 

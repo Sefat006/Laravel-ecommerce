@@ -151,7 +151,7 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td class="sorting_1">{{ $data->product_name }}</td>
                                     <td>
-                                        <img width="80" src="{{ asset('front/assets/images/' . $data->thumb) }}" alt="Product Image">
+                                        <img width="80" src="{{ asset('front/assets/images/products/' . $data->thumb) }}" alt="Product Image">
                                     </td>
                                     <td>{{ $data->color ?? "N/A" }}</td>
                                     <td>{{ $data->size ?? "N/A" }}</td>

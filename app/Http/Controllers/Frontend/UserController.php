@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Deliveryman_notification;
 use App\Models\Order;
 use App\Models\Review;
 use Illuminate\Http\Request;
@@ -147,5 +148,49 @@ class UserController extends Controller
         $user->save();
 
         return back()->with('success', 'Password changed successfully!');
+    }
+
+
+
+
+
+
+
+
+    // In App\Http\Controllers\Frontend\UserController
+
+    public function allOrders()
+    {
+        // Deliveryman sees ALL orders (to know what's happening)
+        $orders = Order::with('orderItems')->latest()->get();
+        return view('front.user.deliveryman-orders.all-orders', compact('orders'));
+    }
+
+    public function assignedOrders()
+    {
+        // Only orders assigned to this deliveryman
+        $orders = Order::with('orderItems')
+            ->where('deliveryman_id', Auth::id())
+            ->latest()
+            ->get();
+
+        // Mark notifications as read when they visit this page
+        Deliveryman_notification::where('deliveryman_id', Auth::id())
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
+        return view('front.user.deliveryman-orders.assigned-orders', compact('orders'));
+    }
+
+    // Deliveryman marks order as delivered
+    public function markDelivered(Request $request, $id)
+    {
+        $order = Order::where('id', $id)
+            ->where('deliveryman_id', Auth::id())
+            ->firstOrFail();
+
+        $order->update(['order_status' => 'delivered']);
+
+        return redirect()->back()->with('success', 'Order marked as delivered!');
     }
 }
